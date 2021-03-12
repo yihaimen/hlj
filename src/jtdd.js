@@ -7,8 +7,6 @@ const runTest = (fileName) => {
   require("../" + fileName);
 };
 
-// const test = (name, callback) => {};
-
 try {
   runTest(fileName);
   console.log("PASS");
