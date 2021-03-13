@@ -9,7 +9,7 @@ const runTest = (fileName) => {
 
 try {
   runTest(fileName);
-  console.log("PASS");
+  console.log(`PASS ${fileName}`);
   console.log(`Tests: ${(getPassedCount())} passed, ${getTotalCount()} total`)
 } catch (e) {
   console.log("ERROR");
