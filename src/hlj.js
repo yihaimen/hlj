@@ -1,5 +1,11 @@
 const fileName = process.argv[2];
-const {test, expect, getPassedCount, getTotalCount, getTestCaseResults} = require('./core');
+const {
+  test,
+  expect,
+  getPassedCount,
+  getTotalCount,
+  getTestCaseResults,
+} = require("./core");
 
 const runTest = (fileName) => {
   global.test = test;
@@ -7,8 +13,10 @@ const runTest = (fileName) => {
   require("../" + fileName);
 };
 
-const formatTestResult = testCaseResults =>
-    testCaseResults.map(testCase => `  ${testCase.isPassed ? '✓' : '✕'} ${testCase.name}`).join("\n");
+const formatTestResult = (testCaseResults) =>
+  testCaseResults
+    .map((testCase) => `  ${testCase.isPassed ? "✓" : "✕"} ${testCase.name}`)
+    .join("\n");
 
 const getFailedCountString = () => {
   const failedCount = getTotalCount() - getPassedCount();
@@ -20,16 +28,16 @@ const getFailedCountString = () => {
 };
 
 let executionTime = 0;
-const getExecutionTime = () => `Time: ${(executionTime / 1000)} s`;
+const getExecutionTime = () => `Time: ${executionTime / 1000} s`;
 
-const getTestResult = isPassed => {
-  let output = ''
-  output += isPassed ? 'PASS' : 'FAIL'
-  output += ` ${fileName}\n`
-  output += `${formatTestResult(getTestCaseResults())}\n`
+const getTestResult = (isPassed) => {
+  let output = "";
+  output += isPassed ? "PASS" : "FAIL";
+  output += ` ${fileName}\n`;
+  output += `${formatTestResult(getTestCaseResults())}\n`;
   output += `Tests: `;
   output += getFailedCountString();
-  output += `${(getPassedCount())} passed, ${getTotalCount()} total\n`;
+  output += `${getPassedCount()} passed, ${getTotalCount()} total\n`;
   output += getExecutionTime();
   return output;
 };
@@ -43,5 +51,5 @@ try {
   isPassed = false;
 } finally {
   executionTime = Date.now() - startAt;
-  console.log(getTestResult(isPassed))
+  console.log(getTestResult(isPassed));
 }
