@@ -26,6 +26,9 @@
     "Mocha",
     "JavaScript unit test"
   ],
+  "bin": {
+    "hlj": "./src/hlj.js"
+  },
   "author": "CodingStyle.cn",
   "license": "MIT"
 }
