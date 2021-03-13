@@ -1,4 +1,7 @@
+let passedCount = 0;
+
 const test = (name, callback) => {
+    passedCount++;
     callback();
 };
 
@@ -8,8 +11,12 @@ const getToBe = actual => (expected) => {
     }
 };
 
-const expect = (actual)=>{
+const expect = (actual) => {
     return {toBe: getToBe(actual)};
 };
 
-module.exports = {test, expect};
+const getPassedCount = () => {
+    return passedCount;
+};
+
+module.exports = {test, expect, getPassedCount};
