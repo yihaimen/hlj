@@ -7,14 +7,17 @@ const runTest = (fileName) => {
   require("../" + fileName);
 };
 
-function getTestResult(isPassed) {
+const formatTestResult = testCaseResults =>
+    testCaseResults.map(testCase => `  ${testCase.isPassed ? '✓' : '✕'} ${testCase.name}`).join("\n");
+
+const getTestResult = isPassed => {
   let output = ''
   output += isPassed ? 'PASS' : 'ERROR'
   output += ` ${fileName}\n`
-  output += `${getTestCaseResults()}\n`
+  output += `${formatTestResult(getTestCaseResults())}\n`
   output += `Tests: ${(getPassedCount())} passed, ${getTotalCount()} total`
   return output;
-}
+};
 
 try {
   runTest(fileName);
