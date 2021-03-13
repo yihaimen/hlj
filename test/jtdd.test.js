@@ -21,7 +21,7 @@ describe("JavaScript TDD framework", () => {
   });
   it('should return ERROR when test failed', () => {
     const stdout = exec("jtdd failed.test.js");
-    expect(stdout).toBe("ERROR\n");
+    expect(stdout).toContain("ERROR");
   });
   describe('Test report', () => {
     it('should output number of tests passed', () => {
@@ -29,6 +29,12 @@ describe("JavaScript TDD framework", () => {
       expect(stdout).toBe("" +
           "PASS two-tests.test.js\n" +
           "Tests: 2 passed, 2 total\n");
+    });
+    it('should output number of tests passed while there are failed tests', () => {
+      const stdout = exec("jtdd passed-and-failed.test.js");
+      expect(stdout).toBe("" +
+          "ERROR passed-and-failed.test.js\n" +
+          "Tests: 1 passed, 2 total\n");
     });
   });
 });

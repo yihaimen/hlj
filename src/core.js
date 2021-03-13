@@ -2,7 +2,6 @@ let passedCount = 0;
 let totalCount = 0;
 
 const test = (name, callback) => {
-    passedCount++;
     totalCount++;
     callback();
 };
@@ -11,6 +10,7 @@ const getToBe = actual => (expected) => {
     if (actual !== expected) {
         throw new Error("");
     }
+    passedCount++;
 };
 
 const expect = (actual) => {

@@ -9,7 +9,7 @@ const runTest = (fileName) => {
 
 function getTestResult(isPassed) {
   let output = ''
-  output += isPassed ? 'PASS' : ''
+  output += isPassed ? 'PASS' : 'ERROR'
   output += ` ${fileName}\n`
   output += `Tests: ${(getPassedCount())} passed, ${getTotalCount()} total`
   return output;
@@ -17,8 +17,7 @@ function getTestResult(isPassed) {
 
 try {
   runTest(fileName);
-  let output = getTestResult(true);
-  console.log(output)
+  console.log(getTestResult(true))
 } catch (e) {
-  console.log("ERROR");
+  console.log(getTestResult(false))
 }
