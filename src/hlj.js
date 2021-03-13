@@ -19,6 +19,9 @@ const getFailedCountString = () => {
   return `${failedCount} failed, `;
 };
 
+let executionTime = 0;
+const getExecutionTime = () => `Time: ${(executionTime / 1000)} s`;
+
 const getTestResult = isPassed => {
   let output = ''
   output += isPassed ? 'PASS' : 'FAIL'
@@ -26,13 +29,19 @@ const getTestResult = isPassed => {
   output += `${formatTestResult(getTestCaseResults())}\n`
   output += `Tests: `;
   output += getFailedCountString();
-  output += `${(getPassedCount())} passed, ${getTotalCount()} total`
+  output += `${(getPassedCount())} passed, ${getTotalCount()} total\n`;
+  output += getExecutionTime();
   return output;
 };
 
+const startAt = Date.now();
+let isPassed;
 try {
   runTest(fileName);
-  console.log(getTestResult(true))
+  isPassed = true;
 } catch (e) {
-  console.log(getTestResult(false))
+  isPassed = false;
+} finally {
+  executionTime = Date.now() - startAt;
+  console.log(getTestResult(isPassed))
 }
