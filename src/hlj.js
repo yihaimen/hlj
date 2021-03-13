@@ -21,7 +21,7 @@ const getFailedCountString = () => {
 
 const getTestResult = isPassed => {
   let output = ''
-  output += isPassed ? 'PASS' : 'ERROR'
+  output += isPassed ? 'PASS' : 'FAIL'
   output += ` ${fileName}\n`
   output += `${formatTestResult(getTestCaseResults())}\n`
   output += `Tests: `;

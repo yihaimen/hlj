@@ -19,9 +19,9 @@ describe("JavaScript TDD framework", () => {
     const stdout = exec("hlj sum.test.js");
     expect(stdout).toContain("PASS");
   });
-  it('should return ERROR when test failed', () => {
+  it('should return FAIL when test failed', () => {
     const stdout = exec("hlj failed.test.js");
-    expect(stdout).toContain("ERROR");
+    expect(stdout).toContain("FAIL");
   });
   describe('Test report', () => {
     it('should output number of tests passed', () => {
@@ -35,7 +35,7 @@ describe("JavaScript TDD framework", () => {
     it('should output number of tests passed while there are failed tests', () => {
       const stdout = exec("hlj passed-and-failed.test.js");
       expect(stdout).toBe("" +
-          "ERROR passed-and-failed.test.js\n" +
+          "FAIL passed-and-failed.test.js\n" +
           "  ✓ 1 plus 1 is 2\n" +
           "  ✕ 2 plus 2 is 5\n" +
           "Tests: 1 failed, 1 passed, 2 total\n");
