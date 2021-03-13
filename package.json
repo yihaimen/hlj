@@ -1,8 +1,8 @@
 {
-  "name": "jtdd",
-  "version": "1.0.0",
-  "description": "",
-  "main": "sum.js",
+  "name": "hlj",
+  "version": "0.0.2",
+  "description": "The fastest TDD for JavaScript world, made by Chinese software craftsman.",
+  "main": "src/hlj.js",
   "dependencies": {
     "child_process": "^1.0.2"
   },
@@ -12,7 +12,20 @@
   "scripts": {
     "test": "jest test/"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codingstyle-cn/hlj.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codingstyle-cn/hlj/issues"
+  },
+  "homepage": "https://github.com/codingstyle-cn/hlj",
+  "keywords": [
+    "TDD",
+    "Jest",
+    "Mocha",
+    "JavaScript unit test"
+  ],
+  "author": "CodingStyle.cn",
+  "license": "MIT"
 }
