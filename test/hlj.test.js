@@ -38,7 +38,7 @@ describe("JavaScript TDD framework", () => {
           "ERROR passed-and-failed.test.js\n" +
           "  ✓ 1 plus 1 is 2\n" +
           "  ✕ 2 plus 2 is 5\n" +
-          "Tests: 1 passed, 2 total\n");
+          "Tests: 1 failed, 1 passed, 2 total\n");
     });
   });
 });

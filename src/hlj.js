@@ -10,12 +10,23 @@ const runTest = (fileName) => {
 const formatTestResult = testCaseResults =>
     testCaseResults.map(testCase => `  ${testCase.isPassed ? '✓' : '✕'} ${testCase.name}`).join("\n");
 
+const getFailedCountString = () => {
+  const failedCount = getTotalCount() - getPassedCount();
+  if (failedCount === 0) {
+    return "";
+  }
+
+  return `${failedCount} failed, `;
+};
+
 const getTestResult = isPassed => {
   let output = ''
   output += isPassed ? 'PASS' : 'ERROR'
   output += ` ${fileName}\n`
   output += `${formatTestResult(getTestCaseResults())}\n`
-  output += `Tests: ${(getPassedCount())} passed, ${getTotalCount()} total`
+  output += `Tests: `;
+  output += getFailedCountString();
+  output += `${(getPassedCount())} passed, ${getTotalCount()} total`
   return output;
 };
 
