@@ -1,5 +1,5 @@
 const fileName = process.argv[2];
-const {test, expect, getPassedCount} = require('./core');
+const {test, expect, getPassedCount, getTotalCount} = require('./core');
 
 const runTest = (fileName) => {
   global.test = test;
@@ -10,8 +10,7 @@ const runTest = (fileName) => {
 try {
   runTest(fileName);
   console.log("PASS");
-  let count = getPassedCount();
-  console.log(`Tests: ${count} passed`)
+  console.log(`Tests: ${(getPassedCount())} passed, ${getTotalCount()} total`)
 } catch (e) {
   console.log("ERROR");
 }

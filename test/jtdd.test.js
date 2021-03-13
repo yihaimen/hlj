@@ -23,8 +23,10 @@ describe("JavaScript TDD framework", () => {
     const stdout = exec("jtdd failed.test.js");
     expect(stdout).toBe("ERROR\n");
   });
-  it('should output number of tests passed', () => {
-    const stdout = exec("jtdd two-tests.test.js");
-    expect(stdout).toBe("PASS\nTests: 2 passed\n");
+  describe('Test report', () => {
+    it('should output number of tests passed', () => {
+      const stdout = exec("jtdd two-tests.test.js");
+      expect(stdout).toBe("PASS\nTests: 2 passed, 2 total\n");
+    });
   });
 });

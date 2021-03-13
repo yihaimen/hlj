@@ -1,7 +1,9 @@
 let passedCount = 0;
+let totalCount = 0;
 
 const test = (name, callback) => {
     passedCount++;
+    totalCount++;
     callback();
 };
 
@@ -19,4 +21,8 @@ const getPassedCount = () => {
     return passedCount;
 };
 
-module.exports = {test, expect, getPassedCount};
+const getTotalCount = () => {
+    return totalCount;
+};
+
+module.exports = {test, expect, getPassedCount, getTotalCount};
