@@ -1,6 +1,6 @@
 {
   "name": "hlj",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The fastest TDD for JavaScript world, made by Chinese software craftsman.",
   "main": "src/hlj.js",
   "dependencies": {
