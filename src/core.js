@@ -15,7 +15,7 @@ const test = (name, callback) => {
 
 const getToBe = (actual) => (expected) => {
   if (actual !== expected) {
-    throw new Error("");
+    throw new Error('');
   }
   passedCount++;
 };
