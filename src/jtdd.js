@@ -7,10 +7,17 @@ const runTest = (fileName) => {
   require("../" + fileName);
 };
 
+function getTestResult() {
+  let output = ''
+  output += `PASS ${fileName}\n`
+  output += `Tests: ${(getPassedCount())} passed, ${getTotalCount()} total`
+  return output;
+}
+
 try {
   runTest(fileName);
-  console.log(`PASS ${fileName}`);
-  console.log(`Tests: ${(getPassedCount())} passed, ${getTotalCount()} total`)
+  let output = getTestResult();
+  console.log(output)
 } catch (e) {
   console.log("ERROR");
 }
