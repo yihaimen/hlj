@@ -6,6 +6,7 @@ const {
   getTotalCount,
   getTestCaseResults,
 } = require("./core");
+const { BLANK_SPACE } = require("./constant");
 
 const runTest = (fileName) => {
   global.test = test;
@@ -15,7 +16,12 @@ const runTest = (fileName) => {
 
 const formatTestResult = (testCaseResults) =>
   testCaseResults
-    .map((testCase) => `  ${testCase.isPassed ? "✓" : "✕"} ${testCase.name}`)
+    .map(
+      (testCase) =>
+        `${BLANK_SPACE.repeat(2)}${testCase.isPassed ? "✓" : "✕"} ${
+          testCase.name
+        }`
+    )
     .join("\n");
 
 const getFailedCountString = () => {
@@ -24,7 +30,7 @@ const getFailedCountString = () => {
     return "";
   }
 
-  return `${failedCount} failed, `;
+  return `${failedCount} failed,${BLANK_SPACE}`;
 };
 
 let executionTime = 0;
@@ -33,9 +39,9 @@ const getExecutionTime = () => `Time: ${executionTime / 1000} s`;
 const getTestResult = (isPassed) => {
   let output = "";
   output += isPassed ? "PASS" : "FAIL";
-  output += ` ${fileName}\n`;
+  output += `${BLANK_SPACE}${fileName}\n`;
   output += `${formatTestResult(getTestCaseResults())}\n`;
-  output += `Tests: `;
+  output += `Tests:${BLANK_SPACE}`;
   output += getFailedCountString();
   output += `${getPassedCount()} passed, ${getTotalCount()} total\n`;
   output += getExecutionTime();
