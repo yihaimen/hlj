@@ -1,9 +1,16 @@
 let passedCount = 0;
 let totalCount = 0;
+let result = [];
 
 const test = (name, callback) => {
     totalCount++;
-    callback();
+    try {
+        callback();
+        result.push("  ✓ " + name);
+    } catch (e) {
+        result.push("  ✕ " + name);
+        throw e;
+    }
 };
 
 const getToBe = actual => (expected) => {
@@ -25,4 +32,8 @@ const getTotalCount = () => {
     return totalCount;
 };
 
-module.exports = {test, expect, getPassedCount, getTotalCount};
+const getTestCaseResults = () => {
+    return result.join("\n");
+};
+
+module.exports = {test, expect, getPassedCount, getTotalCount, getTestCaseResults};
