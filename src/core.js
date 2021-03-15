@@ -13,15 +13,34 @@ const test = (name, callback) => {
   }
 };
 
-const getToBe = (received) => (expected) => {
-  if (received !== expected) {
+const getToBe = (isNot) => (received) => (expected) => {
+  if (received !== expected && !isNot) {
+    throw new Error(JSON.stringify({ expected, received }));
+  }
+  passedCount++;
+};
+
+const getToEqual = (isNot) => (received) => (expected) => {
+  const isObject = typeof received === 'object' && typeof expected === 'object';
+  const condition = isObject
+    ? JSON.stringify(received) !== JSON.stringify(expected)
+    : received !== expected;
+
+  if (condition && !isNot) {
     throw new Error(JSON.stringify({ expected, received }));
   }
   passedCount++;
 };
 
 const expect = (received) => {
-  return { toBe: getToBe(received) };
+  const matchers = (isNot = false) => ({
+    toBe: getToBe(isNot)(received),
+    toEqual: getToEqual(isNot)(received),
+  });
+  return {
+    ...matchers(),
+    not: { ...matchers(true) },
+  };
 };
 
 const getPassedCount = () => {
