@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+const fs = require('fs')
+
 const fileName = process.argv[2];
 const {
   test,
@@ -11,8 +13,14 @@ const {
 const runTest = (fileName) => {
   global.test = test;
   global.expect = expect;
-  if (fileName === 'test-dir/') {
-    require('../test-dir/test-matcher.test');
+
+  function isDir(fileName) {
+    return fs.lstatSync(fileName).isDirectory() ;
+  }
+
+  if (isDir(fileName)) {
+  	let strings = fs.readdirSync(fileName);
+    require('../' + fileName + strings[0]);
   } else {
     require('../' + fileName);
   }
