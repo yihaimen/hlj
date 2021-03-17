@@ -8,7 +8,12 @@ The fastest TDD for JavaScript world, made by Chinese software craftsman.
 
 由中国软件匠艺社区多名艺匠结对打造的 JavaScript 测试框架，用法和 Jest 一样，但是运行速度快几百倍。
 
-我们在每一个奇数号日期直播这个项目的开发过程，想要了解敏捷，TDD，持续集成，结对编程，小步提交。请关注微信视频号：软件匠艺。开播自动提醒。
+我们在每一个奇数号日期直播这个项目的开发过程，全程采用敏捷，DevOps，TDD，持续集成，结对编程，小步提交等实践。
+
+直播地址：
+
+- B 站：[http://live.bilibili.com/64133](http://live.bilibili.com/64133)
+- 微信视频号：软件匠艺
 
 ### To Contribute
 
