@@ -18,4 +18,10 @@ describe('Test Matcher', () => {
     expect(stdout).toContain('PASS');
     expect(stdout).toContain('Tests: 2 passed, 2 total');
   });
+
+  it('should verify toMatch', () => {
+    const stdout = exec('hlj toMatch.test.js');
+    expect(stdout).toContain('PASS');
+    expect(stdout).toContain('Tests: 2 passed, 2 total');
+  });
 });
