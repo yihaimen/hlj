@@ -10,7 +10,7 @@ const {
   getTestCaseResults,
 } = require('./core');
 
-const runTest = (fileName) => {
+const runTest = (path) => {
   global.test = test;
   global.expect = expect;
 
@@ -18,11 +18,13 @@ const runTest = (fileName) => {
     return fs.lstatSync(fileName).isDirectory() ;
   }
 
-  if (isDir(fileName)) {
-  	let strings = fs.readdirSync(fileName);
-    require('../' + fileName + strings[0]);
+  if (isDir(path)) {
+  	let fileNames = fs.readdirSync(path);
+  	fileNames.forEach(fileName=>{
+      require('../' + path + fileName);
+    })
   } else {
-    require('../' + fileName);
+    require('../' + path);
   }
 };
 
