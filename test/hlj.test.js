@@ -44,20 +44,6 @@ describe('JavaScript TDD framework', () => {
     });
   });
 
-  describe('Test Matcher', () => {
-    it('should output test not.toBe matcher', () => {
-      const stdout = exec('hlj test-matcher.test.js');
-      expect(stdout).toContain('PASS');
-    });
-
-    it('should output pass test not.toEqual matcher', () => {
-      const stdout = exec('hlj test-matcher.test.js');
-      // todo: Object diff
-      expect(stdout).toContain('PASS');
-      expect(stdout).toContain('Tests: 3 passed, 3 total');
-    });
-  });
-
   describe('Run tests in directory', () => {
     it('should run all files in specified directory', () => {
       const stdout = exec('hlj test-dir/');
