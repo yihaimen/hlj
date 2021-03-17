@@ -17,13 +17,13 @@ The fastest TDD for JavaScript world, made by Chinese software craftsman.
 
 ### Features
 
-Keywords
+**Keywords**
 
 - describe
 - test
 - it
 
-Matchers
+**Matchers**
 
 - toBe
 - toEqual
