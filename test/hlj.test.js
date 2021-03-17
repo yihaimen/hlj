@@ -66,4 +66,12 @@ describe("JavaScript TDD framework", () => {
       expect(stdout).toContain("Tests: 3 passed, 3 total");
     });
   });
+
+  describe('Run tests in directory', () => {
+    it('should run all files in specified directory', () => {
+      const stdout = exec("hlj test-dir/");
+      expect(stdout).toContain("PASS");
+      expect(stdout).toContain("Tests: 3 passed, 3 total");
+    });
+  });
 });

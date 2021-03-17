@@ -11,7 +11,11 @@ const {
 const runTest = (fileName) => {
   global.test = test;
   global.expect = expect;
-  require('../' + fileName);
+  if (fileName === 'test-dir/') {
+    require('../test-dir/test-matcher.test');
+  } else {
+    require('../' + fileName);
+  }
 };
 
 const formatTestResult = (testCaseResults) =>
