@@ -3,6 +3,7 @@ const fs = require('fs')
 
 const fileName = process.argv[2];
 const {
+  it,
   test,
   expect,
   getPassedCount,
@@ -12,6 +13,7 @@ const {
 
 const runTest = (path) => {
   global.test = test;
+  global.it = it;
   global.expect = expect;
 
   function isDir(fileName) {
