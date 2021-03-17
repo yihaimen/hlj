@@ -29,7 +29,7 @@
     "JavaScript unit test"
   ],
   "bin": {
-    "hlj": "node ./src/hlj.js"
+    "hlj": "./src/hlj.js"
   },
   "author": "CodingStyle.cn",
   "license": "MIT"

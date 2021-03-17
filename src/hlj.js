@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const fileName = process.argv[2];
 const {
   test,
