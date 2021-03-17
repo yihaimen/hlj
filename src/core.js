@@ -14,6 +14,7 @@ const test = (name, callback) => {
   try {
     callback();
     testCaseResults.push({ name, isPassed: true });
+    passedCount++;
   } catch (e) {
     testCaseResults.push({ name, isPassed: false });
     throw e;
@@ -24,7 +25,6 @@ const getToBe = (isNot) => (received) => (expected) => {
   if (received !== expected && !isNot) {
     throw new Error(JSON.stringify({ expected, received }));
   }
-  passedCount++;
 };
 
 const getToEqual = (isNot) => (received) => (expected) => {
@@ -36,7 +36,6 @@ const getToEqual = (isNot) => (received) => (expected) => {
   if (condition && !isNot) {
     throw new Error(JSON.stringify({ expected, received }));
   }
-  passedCount++;
 };
 
 const expect = (received) => {

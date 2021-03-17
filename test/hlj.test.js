@@ -19,7 +19,7 @@ describe('JavaScript TDD framework', () => {
       expect(stdout).toContain(
         '' +
           'PASS two-tests.test.js\n' +
-          '  ✓ 1 plus 1 is 2\n' +
+          '  ✓ 1 plus 2 is 3\n' +
           '  ✓ 2 plus 2 is 4\n' +
           'Tests: 2 passed, 2 total\n'
       );
@@ -29,7 +29,7 @@ describe('JavaScript TDD framework', () => {
       expect(stdout).toContain(
         '' +
           'FAIL passed-and-failed.test.js\n' +
-          '  ✓ 1 plus 1 is 2\n' +
+          '  ✓ 1 plus 2 is 3\n' +
           '  ✕ 2 plus 2 is 5\n' +
           '  Expected: 5\n' +
           '  Received: 4\n' +
