@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const fs = require('fs')
+const fs = require('fs');
 
 const fileName = process.argv[2];
 const {
@@ -17,14 +17,14 @@ const runTest = (path) => {
   global.expect = expect;
 
   function isDir(fileName) {
-    return fs.lstatSync(fileName).isDirectory() ;
+    return fs.lstatSync(fileName).isDirectory();
   }
 
   if (isDir(path)) {
-  	let fileNames = fs.readdirSync(path);
-  	fileNames.forEach(fileName=>{
+    let fileNames = fs.readdirSync(path);
+    fileNames.forEach((fileName) => {
       require('../' + path + fileName);
-    })
+    });
   } else {
     require('../' + path);
   }

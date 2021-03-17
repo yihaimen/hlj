@@ -2,9 +2,9 @@ let passedCount = 0;
 let totalCount = 0;
 let testCaseResults = [];
 
-const it = (name,callback)=>{
-  test(name,callback)
-}
+const it = (name, callback) => {
+  test(name, callback);
+};
 const test = (name, callback) => {
   totalCount++;
   try {
