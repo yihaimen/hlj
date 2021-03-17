@@ -15,6 +15,25 @@ The fastest TDD for JavaScript world, made by Chinese software craftsman.
 - B 站：[http://live.bilibili.com/64133](http://live.bilibili.com/64133)
 - 微信视频号：软件匠艺
 
+### Features
+
+Keywords
+
+- describe
+- test
+- it
+
+Matchers
+
+- toBe
+- toEqual
+- toContain
+- toMatch
+- not.toBe
+- not.toEqual
+- not.toContain
+- not.toMatch
+
 ### To Contribute
 
 1. Pick story card in [`Todo`](https://github.com/codingstyle-cn/hlj/projects/1)
