@@ -2,6 +2,10 @@ let passedCount = 0;
 let totalCount = 0;
 let testCaseResults = [];
 
+const describe = (name, callback) => {
+  callback();
+};
+
 const it = (name, callback) => {
   test(name, callback);
 };
@@ -62,6 +66,7 @@ module.exports = {
   it,
   test,
   expect,
+  describe,
   getPassedCount,
   getTotalCount,
   getTestCaseResults,

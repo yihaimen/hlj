@@ -6,6 +6,7 @@ const {
   it,
   test,
   expect,
+  describe,
   getPassedCount,
   getTotalCount,
   getTestCaseResults,
@@ -15,6 +16,7 @@ const runTest = (path) => {
   global.test = test;
   global.it = it;
   global.expect = expect;
+  global.describe = describe;
 
   function isDir(fileName) {
     return fs.lstatSync(fileName).isDirectory();
