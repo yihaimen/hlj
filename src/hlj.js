@@ -2,6 +2,8 @@
 const fs = require('fs');
 
 const fileName = process.argv[2];
+const testMethod = process.argv[3];
+console.error('eeeeeeee');
 const {
   it,
   test,
@@ -12,11 +14,12 @@ const {
   getTestCaseResults,
 } = require('./core');
 
-const runTest = (path) => {
+const runTest = (path,testMethod) => {
   global.test = test;
   global.it = it;
   global.expect = expect;
   global.describe = describe;
+  global.testMethod = testMethod;
 
   function isDir(fileName) {
     return fs.lstatSync(fileName).isDirectory();
@@ -73,7 +76,7 @@ const startAt = Date.now();
 let isPassed;
 let testMessage;
 try {
-  runTest(fileName);
+  runTest(fileName,testMethod);
   isPassed = true;
 } catch (e) {
   isPassed = false;

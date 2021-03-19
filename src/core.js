@@ -10,6 +10,9 @@ const it = (name, callback) => {
   test(name, callback);
 };
 const test = (name, callback) => {
+  if (name !== global.testMethod) {
+    return;
+  }
   totalCount++;
   try {
     callback();

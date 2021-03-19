@@ -8,8 +8,8 @@ child_process@^1.0.2:
   integrity sha1-sffn/HPSXn/R1FWtyU4UODAYK1o=
 
 hlj@^0.2.0:
-  version "0.2.1"
-  resolved "https://registry.npm.taobao.org/hlj/download/hlj-0.2.1.tgz#817a77593a9fd7f31329b72634c69eb1d142012a"
-  integrity sha1-gXp3WTqf1/MTKbcmNMaesdFCASo=
+  version "0.2.3"
+  resolved "https://registry.npm.taobao.org/hlj/download/hlj-0.2.3.tgz#7ce9188a3bf8287455ab87137aadb84c88a54817"
+  integrity sha1-fOkYijv4KHRVq4cTeq24TIilSBc=
   dependencies:
     child_process "^1.0.2"
