@@ -25,10 +25,10 @@ const runTest = (path) => {
   if (isDir(path)) {
     let fileNames = fs.readdirSync(path);
     fileNames.forEach((fileName) => {
-      require('../' + path + fileName);
+      require(process.cwd() + '/' + path + fileName);
     });
   } else {
-    require('../' + path);
+    require(process.cwd() + '/' + path);
   }
 };
 
