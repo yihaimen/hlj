@@ -7,7 +7,7 @@
     "child_process": "^1.0.2"
   },
   "devDependencies": {
-    "hlj": "^0.2.0"
+    "hlj": "^0.2.3"
   },
   "scripts": {
     "test": "hlj test/",

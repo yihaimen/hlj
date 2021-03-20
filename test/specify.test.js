@@ -1,11 +1,10 @@
 const { exec } = require('./exec');
+const { getSuccessfulReport } = require('./fixtures');
 it('should specify test to run', () => {
   // hlj xxx.test xxx
   const stdout = exec("hlj specify-test-method.test.js 'test 1'");
+  expect(stdout).toContain('PASS');
   expect(stdout).toContain(
-    '' +
-      'PASS specify-test-method.test.js\n' +
-      '  ✓ test 1\n' +
-      'Tests: 1 passed, 1 total\n'
+    `Tests: ${getSuccessfulReport('1 passed')}, 1 total`
   );
 });
