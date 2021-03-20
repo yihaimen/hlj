@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 const fs = require('fs');
-
+const {
+  getSuccessfulSuite,
+  getFailedSuite,
+  getSuccessfulReport,
+  getFailedReport,
+} = require('./render');
 const fileName = process.argv[2];
 const {
   it,
@@ -37,13 +42,15 @@ const formatTestResult = (testCaseResults) =>
     .map((testCase) => `  ${testCase.isPassed ? '✓' : '✕'} ${testCase.name}`)
     .join('\n');
 
+const getPassedCountString = () =>
+  `${getSuccessfulReport(getPassedCount() + ' passed')}, `;
 const getFailedCountString = () => {
   const failedCount = getTotalCount() - getPassedCount();
   if (failedCount === 0) {
     return '';
   }
 
-  return `${failedCount} failed, `;
+  return `${getFailedReport(failedCount + ' failed')}, `;
 };
 
 let executionTime = 0;
@@ -59,13 +66,23 @@ function getDiffMessage(isPassed, testMessage) {
   return `\n  Expected: ${expected}\n  Received: ${received}`;
 }
 
+const renderByStatus = (
+  isPassed,
+  passedMessage = 'PASS',
+  failedMessage = 'FAIL'
+) => {
+  return isPassed
+    ? `${getSuccessfulSuite(passedMessage)} `
+    : `${getFailedSuite(failedMessage)} `;
+};
+
 const getTestResult = (isPassed, testMessage = {}) => {
-  return `${isPassed ? 'PASS' : 'FAIL'} ${fileName}
+  return `${renderByStatus(isPassed)}${fileName}
 ${formatTestResult(getTestCaseResults())}${getDiffMessage(
     isPassed,
     testMessage
   )}
-Tests: ${getFailedCountString()}${getPassedCount()} passed, ${getTotalCount()} total
+Tests: ${getFailedCountString()}${getPassedCountString()}${getTotalCount()} total
 ${getExecutionTime()}`;
 };
 

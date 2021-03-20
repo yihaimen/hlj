@@ -1,5 +1,3 @@
-const BLANK_SPACE = ' ';
-
 const COLOR_SCHEMA = {
   bright: '\x1B[1m',
   grey: '\x1B[2m',
@@ -26,7 +24,21 @@ const COLOR_SCHEMA = {
   reset: '\x1B[0m',
 };
 
+const getSuccessfulSuite = (text) =>
+  `${COLOR_SCHEMA.greenBG} ${text} ${COLOR_SCHEMA.reset}`;
+
+const getFailedSuite = (text) =>
+  `${COLOR_SCHEMA.redBG} ${text} ${COLOR_SCHEMA.reset}`;
+
+const getSuccessfulReport = (text) =>
+  `${COLOR_SCHEMA.green}${text}${COLOR_SCHEMA.reset}`;
+
+const getFailedReport = (text) =>
+  `${COLOR_SCHEMA.red}${text}${COLOR_SCHEMA.reset}`;
+
 module.exports = {
-  BLANK_SPACE,
-  COLOR_SCHEMA,
+  getSuccessfulSuite,
+  getFailedSuite,
+  getSuccessfulReport,
+  getFailedReport,
 };

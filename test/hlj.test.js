@@ -1,5 +1,5 @@
 const { exec } = require('./exec');
-
+const { getSuccessfulReport, getSuccessfulSuite, getFailedReport, getFailedSuite } = require('./fixtures');
 describe('JavaScript TDD framework', () => {
   it('is a CLI program', () => {
     const stdout = exec('hlj sum.test.js');
@@ -18,22 +18,22 @@ describe('JavaScript TDD framework', () => {
       const stdout = exec('hlj two-tests.test.js');
       expect(stdout).toContain(
         '' +
-          'PASS two-tests.test.js\n' +
+          `${getSuccessfulSuite('PASS')} two-tests.test.js\n` +
           '  ✓ 1 plus 2 is 3\n' +
           '  ✓ 2 plus 2 is 4\n' +
-          'Tests: 2 passed, 2 total\n'
+          `Tests: ${getSuccessfulReport('2 passed')}, 2 total\n`
       );
     });
     it('should output number of tests passed while there are failed tests', () => {
       const stdout = exec('hlj passed-and-failed.test.js');
       expect(stdout).toContain(
         '' +
-          'FAIL passed-and-failed.test.js\n' +
+          `${getFailedSuite('FAIL')} passed-and-failed.test.js\n` +
           '  ✓ 1 plus 2 is 3\n' +
           '  ✕ 2 plus 2 is 5\n' +
           '  Expected: 5\n' +
           '  Received: 4\n' +
-          'Tests: 1 failed, 1 passed, 2 total\n'
+          `Tests: ${getFailedReport('1 failed')}, ${getSuccessfulReport('1 passed')}, 2 total\n`
       );
     });
 
@@ -48,7 +48,7 @@ describe('JavaScript TDD framework', () => {
     it('should run all files in specified directory', () => {
       const stdout = exec('hlj test-dir/');
       expect(stdout).toContain('PASS');
-      expect(stdout).toContain('Tests: 6 passed, 6 total');
+      expect(stdout).toContain(`Tests: ${getSuccessfulReport('6 passed')}, 6 total`);
     });
   });
 });
