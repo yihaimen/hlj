@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 const fs = require('fs');
-
+const {
+  getSuccessfulSuite,
+  getFailedSuite,
+  getSuccessfulReport,
+  getFailedReport,
+  getTestElapsed,
+} = require('./render');
+const { TEST_RESULT } = require('./constant');
 const fileName = process.argv[2];
 const testMethod = process.argv[3];
 console.error('eeeeeeee');
@@ -37,20 +44,29 @@ const runTest = (path,testMethod) => {
 
 const formatTestResult = (testCaseResults) =>
   testCaseResults
-    .map((testCase) => `  ${testCase.isPassed ? '✓' : '✕'} ${testCase.name}`)
+    .map(
+      (testCase) =>
+        `  ${
+          testCase.isPassed
+            ? getSuccessfulReport(TEST_RESULT.PASS)
+            : getFailedReport(TEST_RESULT.FAIL)
+        } ${testCase.name}`
+    )
     .join('\n');
 
+const getPassedCountString = () =>
+  `${getSuccessfulReport(getPassedCount() + ' passed')}, `;
 const getFailedCountString = () => {
   const failedCount = getTotalCount() - getPassedCount();
   if (failedCount === 0) {
     return '';
   }
 
-  return `${failedCount} failed, `;
+  return `${getFailedReport(failedCount + ' failed')}, `;
 };
 
 let executionTime = 0;
-const getExecutionTime = () => `Time: ${executionTime / 1000} s`;
+const getExecutionTime = () => `Time: ${getTestElapsed(executionTime / 1000)}`;
 
 function getDiffMessage(isPassed, testMessage) {
   if (isPassed) {
@@ -59,16 +75,28 @@ function getDiffMessage(isPassed, testMessage) {
 
   const { expected, received } = testMessage;
 
-  return `\n  Expected: ${expected}\n  Received: ${received}`;
+  return `\n  Expected: ${getSuccessfulReport(
+    expected
+  )}\n  Received: ${getFailedReport(received)}`;
 }
 
+const renderByStatus = (
+  isPassed,
+  passedMessage = 'PASS',
+  failedMessage = 'FAIL'
+) => {
+  return isPassed
+    ? `${getSuccessfulSuite(passedMessage)} `
+    : `${getFailedSuite(failedMessage)} `;
+};
+
 const getTestResult = (isPassed, testMessage = {}) => {
-  return `${isPassed ? 'PASS' : 'FAIL'} ${fileName}
+  return `${renderByStatus(isPassed)}${fileName}
 ${formatTestResult(getTestCaseResults())}${getDiffMessage(
     isPassed,
     testMessage
   )}
-Tests: ${getFailedCountString()}${getPassedCount()} passed, ${getTotalCount()} total
+Tests: ${getFailedCountString()}${getPassedCountString()}${getTotalCount()} total
 ${getExecutionTime()}`;
 };
 
