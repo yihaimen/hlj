@@ -72,7 +72,9 @@ function getDiffMessage(isPassed, testMessage) {
 
   const { expected, received } = testMessage;
 
-  return `\n  Expected: ${expected}\n  Received: ${received}`;
+  return `\n  Expected: ${getSuccessfulReport(
+    expected
+  )}\n  Received: ${getFailedReport(received)}`;
 }
 
 const renderByStatus = (
