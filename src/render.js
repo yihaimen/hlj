@@ -11,9 +11,12 @@ const getSuccessfulReport = (text) =>
 const getFailedReport = (text) =>
   `${COLOR_SCHEMA.red}${text}${COLOR_SCHEMA.reset}`;
 
+const getTestElapsed = (time) =>
+  `${COLOR_SCHEMA.yellow}${time}s${COLOR_SCHEMA.reset}`;
 module.exports = {
   getSuccessfulSuite,
   getFailedSuite,
   getSuccessfulReport,
   getFailedReport,
+  getTestElapsed,
 };

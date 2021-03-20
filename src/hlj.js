@@ -5,7 +5,9 @@ const {
   getFailedSuite,
   getSuccessfulReport,
   getFailedReport,
+  getTestElapsed,
 } = require('./render');
+const { TEST_RESULT } = require('./constant');
 const fileName = process.argv[2];
 const {
   it,
@@ -39,7 +41,14 @@ const runTest = (path) => {
 
 const formatTestResult = (testCaseResults) =>
   testCaseResults
-    .map((testCase) => `  ${testCase.isPassed ? '✓' : '✕'} ${testCase.name}`)
+    .map(
+      (testCase) =>
+        `  ${
+          testCase.isPassed
+            ? getSuccessfulReport(TEST_RESULT.PASS)
+            : getFailedReport(TEST_RESULT.FAIL)
+        } ${testCase.name}`
+    )
     .join('\n');
 
 const getPassedCountString = () =>
@@ -54,7 +63,7 @@ const getFailedCountString = () => {
 };
 
 let executionTime = 0;
-const getExecutionTime = () => `Time: ${executionTime / 1000} s`;
+const getExecutionTime = () => `Time: ${getTestElapsed(executionTime / 1000)}`;
 
 function getDiffMessage(isPassed, testMessage) {
   if (isPassed) {

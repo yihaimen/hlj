@@ -26,7 +26,12 @@ const COLOR_SCHEMA = {
   reset: '\x1B[0m',
 };
 
+const TEST_RESULT = {
+  PASS: '✓',
+  FAIL: 'x',
+};
 module.exports = {
   BLANK_SPACE,
   COLOR_SCHEMA,
+  TEST_RESULT,
 };

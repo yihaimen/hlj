@@ -1,5 +1,10 @@
 const { exec } = require('./exec');
-const { getSuccessfulReport, getSuccessfulSuite, getFailedReport, getFailedSuite } = require('./fixtures');
+const {
+  getSuccessfulReport,
+  getSuccessfulSuite,
+  getFailedReport,
+  getFailedSuite,
+} = require('./fixtures');
 describe('JavaScript TDD framework', () => {
   it('is a CLI program', () => {
     const stdout = exec('hlj sum.test.js');
@@ -19,8 +24,8 @@ describe('JavaScript TDD framework', () => {
       expect(stdout).toContain(
         '' +
           `${getSuccessfulSuite('PASS')} two-tests.test.js\n` +
-          '  ✓ 1 plus 2 is 3\n' +
-          '  ✓ 2 plus 2 is 4\n' +
+          `  ${getSuccessfulReport('✓')} 1 plus 2 is 3\n` +
+          `  ${getSuccessfulReport('✓')} 2 plus 2 is 4\n` +
           `Tests: ${getSuccessfulReport('2 passed')}, 2 total\n`
       );
     });
@@ -29,18 +34,23 @@ describe('JavaScript TDD framework', () => {
       expect(stdout).toContain(
         '' +
           `${getFailedSuite('FAIL')} passed-and-failed.test.js\n` +
-          '  ✓ 1 plus 2 is 3\n' +
-          '  ✕ 2 plus 2 is 5\n' +
+          `  ${getSuccessfulReport('✓')} 1 plus 2 is 3\n` +
+          `  ${getFailedReport('x')} 2 plus 2 is 5\n` +
           '  Expected: 5\n' +
           '  Received: 4\n' +
-          `Tests: ${getFailedReport('1 failed')}, ${getSuccessfulReport('1 passed')}, 2 total\n`
+          `Tests: ${getFailedReport('1 failed')}, ${getSuccessfulReport(
+            '1 passed'
+          )}, 2 total\n`
       );
     });
 
     it('should output execution time', () => {
       const stdout = exec('hlj passed-and-failed.test.js');
-      const expectRegex = /Time: ([0-9]*[.])?[0-9]+ s/;
-      expect(stdout).toMatch(expectRegex);
+      const expectSuffix = /([0-9]*[.])?[0-9]+s/;
+      const expectPrefix = /Time:/;
+
+      expect(stdout).toMatch(expectPrefix);
+      expect(stdout).toMatch(expectSuffix);
     });
   });
 
@@ -48,7 +58,9 @@ describe('JavaScript TDD framework', () => {
     it('should run all files in specified directory', () => {
       const stdout = exec('hlj test-dir/');
       expect(stdout).toContain('PASS');
-      expect(stdout).toContain(`Tests: ${getSuccessfulReport('6 passed')}, 6 total`);
+      expect(stdout).toContain(
+        `Tests: ${getSuccessfulReport('6 passed')}, 6 total`
+      );
     });
   });
 });
