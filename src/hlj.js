@@ -13,12 +13,13 @@ const testMethod = process.argv[3];
 const {
   it,
   test,
-  expect,
   describe,
   getPassedCount,
   getTotalCount,
   getTestCaseResults,
 } = require('./core');
+
+const { expect } = require('./matcher');
 
 const runTest = (path, testMethod) => {
   global.test = test;
