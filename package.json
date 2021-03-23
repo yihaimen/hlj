@@ -12,7 +12,8 @@
   "scripts": {
     "test": "hlj test/",
     "hlj:pass": "node src/hlj.js fixture/sum.test.js",
-    "hlj:failed": "node src/hlj.js fixture/failed.test.js"
+    "hlj:failed": "node src/hlj.js fixture/failed.test.js",
+    "hlj:skipped": "node src/hlj.js fixture/skipped.test.js"
   },
   "repository": {
     "type": "git",
