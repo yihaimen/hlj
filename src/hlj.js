@@ -32,9 +32,14 @@ const runTest = (path, testMethod) => {
     return fs.lstatSync(fileName).isDirectory();
   }
 
+  const isTestFile = (fileName) => {
+    return fileName.endsWith('.test.js');
+  };
+
   if (isDir(path)) {
-    let fileNames = fs.readdirSync(path);
-    fileNames.forEach((fileName) => {
+    const fileNames = fs.readdirSync(path);
+    const testFiles = fileNames.filter((fileName) => isTestFile(fileName));
+    testFiles.forEach((fileName) => {
       require(process.cwd() + '/' + path + fileName);
     });
   } else {

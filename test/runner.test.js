@@ -1,0 +1,12 @@
+const { exec } = require('./exec');
+const { getSuccessfulReport, FIXTURE } = require('./fixtures');
+describe('Runner', () => {
+  describe('Run tests in directory', () => {
+    it('should run all .test.js files in specified directory', () => {
+      const stdout = exec(`hlj ${FIXTURE}/test-dir/`);
+      expect(stdout).toContain('PASS');
+      expect(stdout).toContain('6 passed');
+      expect(stdout).toContain('6 total');
+    });
+  });
+});
