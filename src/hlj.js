@@ -1,27 +1,11 @@
 #!/usr/bin/env node
 const fs = require('fs');
-const {
-  getSuccessfulSuite,
-  getFailedSuite,
-  getSuccessfulReport,
-  getFailedReport,
-  getTestElapsed,
-} = require('./render');
-const { TEST_RESULT } = require('./constant');
 const fileName = process.argv[2];
 const testMethod = process.argv[3];
-const {
-  it,
-  test,
-  describe,
-  getPassedCount,
-  getFailedCount,
-  getSkippedCount,
-  getTotalCount,
-  getTestCaseResults,
-} = require('./core');
+const { it, test, describe } = require('./core');
 
 const { expect } = require('./matcher');
+const { getTestResult } = require('./report');
 
 const runTest = (path, testMethod) => {
   global.test = test;
@@ -59,72 +43,6 @@ const isTestFile = (fileName) => {
   return fileName.endsWith('.test.js');
 };
 
-const formatTestResult = (testCaseResults) =>
-  testCaseResults
-    .map(
-      (testCase) =>
-        `  ${
-          testCase.isPassed
-            ? getSuccessfulReport(TEST_RESULT.PASS)
-            : getFailedReport(TEST_RESULT.FAIL)
-        } ${testCase.name}`
-    )
-    .join('\n');
-
-const getPassedCountString = () => {
-  if (getPassedCount() === 0) return '';
-  return `${getSuccessfulReport(getPassedCount() + ' passed')}, `;
-};
-
-const getSkippedCountString = () => {
-  if (getSkippedCount() === 0) return '';
-  return `${getSkippedCount() + ' skipped'}, `;
-};
-
-const getFailedCountString = () => {
-  const failedCount = getFailedCount();
-  if (failedCount === 0) {
-    return '';
-  }
-
-  return `${getFailedReport(failedCount + ' failed')}, `;
-};
-
-let executionTime = 0;
-const getExecutionTime = () => `Time: ${getTestElapsed(executionTime / 1000)}`;
-
-function getDiffMessage(isPassed, testMessage) {
-  if (isPassed) {
-    return '';
-  }
-
-  const { expected, received } = testMessage;
-
-  return `\n  Expected: ${getSuccessfulReport(
-    expected
-  )}\n  Received: ${getFailedReport(received)}`;
-}
-
-const renderByStatus = (
-  isPassed,
-  passedMessage = 'PASS',
-  failedMessage = 'FAIL'
-) => {
-  return isPassed
-    ? `${getSuccessfulSuite(passedMessage)} `
-    : `${getFailedSuite(failedMessage)} `;
-};
-
-const getTestResult = (isPassed, testMessage = {}) => {
-  return `${renderByStatus(isPassed)}${fileName}
-${formatTestResult(getTestCaseResults())}${getDiffMessage(
-    isPassed,
-    testMessage
-  )}
-Tests: ${getSkippedCountString()}${getFailedCountString()}${getPassedCountString()}${getTotalCount()} total
-${getExecutionTime()}`;
-};
-
 const startAt = Date.now();
 let isPassed;
 let testMessage;
@@ -135,6 +53,6 @@ try {
   isPassed = false;
   testMessage = JSON.parse(e.message);
 } finally {
-  executionTime = Date.now() - startAt;
-  console.log(getTestResult(isPassed, testMessage));
+  const executionTime = Date.now() - startAt;
+  console.log(getTestResult(fileName, isPassed, testMessage, executionTime));
 }
