@@ -28,23 +28,33 @@ const runTest = (path, testMethod) => {
   global.describe = describe;
   global.testMethod = testMethod;
 
-  function isDir(fileName) {
-    return fs.lstatSync(fileName).isDirectory();
-  }
+  const fullPath = process.cwd() + '/' + path;
+  requireTestFile(fullPath);
+};
 
-  const isTestFile = (fileName) => {
-    return fileName.endsWith('.test.js');
-  };
-
+const requireTestFile = (path) => {
   if (isDir(path)) {
     const fileNames = fs.readdirSync(path);
     const testFiles = fileNames.filter((fileName) => isTestFile(fileName));
     testFiles.forEach((fileName) => {
-      require(process.cwd() + '/' + path + fileName);
+      require(path + '/' + fileName);
+    });
+
+    const childDirs = fileNames.filter((fileName) => !fileName.endsWith('.js'));
+    childDirs.forEach((dir) => {
+      requireTestFile(path + '/' + dir);
     });
   } else {
-    require(process.cwd() + '/' + path);
+    require(path);
   }
+};
+
+function isDir(fileName) {
+  return fs.lstatSync(fileName).isDirectory();
+}
+
+const isTestFile = (fileName) => {
+  return fileName.endsWith('.test.js');
 };
 
 const formatTestResult = (testCaseResults) =>
