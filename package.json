@@ -6,13 +6,9 @@
   "dependencies": {
     "child_process": "^1.0.2"
   },
-  "devDependencies": {
-    "hlj": "^0.2.3"
-  },
+  "devDependencies": {},
   "scripts": {
-    "test": "hlj test/",
-    "hlj:pass": "node src/hlj.js sum.test.js",
-    "hlj:failed": "node src/hlj.js failed.test.js"
+    "test": "node src/hlj.js test/"
   },
   "repository": {
     "type": "git",
@@ -22,12 +18,7 @@
     "url": "https://github.com/codingstyle-cn/hlj/issues"
   },
   "homepage": "https://github.com/codingstyle-cn/hlj",
-  "keywords": [
-    "TDD",
-    "Jest",
-    "Mocha",
-    "JavaScript unit test"
-  ],
+  "keywords": ["TDD", "Jest", "Mocha", "JavaScript unit test"],
   "bin": {
     "hlj": "./src/hlj.js"
   },
