@@ -2,12 +2,7 @@ const { execSync } = require('child_process');
 const exec = (cmd) => {
   try {
     return execSync(
-      'node src/' +
-        cmd.split(' ')[0] +
-        '.js' +
-        ' ' +
-        'fixture/' +
-        cmd.substring(cmd.indexOf(' ') + 1)
+      'node src/' + cmd.split(' ')[0] + '.js' + cmd.substring(cmd.indexOf(' '))
     ).toString();
   } catch (e) {
     return e;
