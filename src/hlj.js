@@ -21,6 +21,10 @@ const {
 
 const { expect } = require('./matcher');
 
+const isDir = (fileName) => {
+  return fs.lstatSync(fileName).isDirectory();
+};
+
 const runTest = (path, testMethod) => {
   global.test = test;
   global.it = it;
@@ -28,18 +32,20 @@ const runTest = (path, testMethod) => {
   global.describe = describe;
   global.testMethod = testMethod;
 
-  function isDir(fileName) {
-    return fs.lstatSync(fileName).isDirectory();
-  }
-
-  if (isDir(path)) {
-    let fileNames = fs.readdirSync(path);
-    fileNames.forEach((fileName) => {
-      require(process.cwd() + '/' + path + fileName);
-    });
+  const fullPath = process.cwd() + '/' + path;
+  if (isDir(fullPath)) {
+    requireFilesIn(fullPath);
   } else {
-    require(process.cwd() + '/' + path);
+    require(fullPath);
   }
+};
+
+const requireFilesIn = (path) => {
+  const fileNames = fs.readdirSync(path);
+  fileNames.forEach((fileName) => {
+    const fullPath = path + fileName;
+    require(fullPath);
+  });
 };
 
 const formatTestResult = (testCaseResults) =>
