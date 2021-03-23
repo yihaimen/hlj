@@ -1,3 +1,5 @@
+const FIXTURE = `fixture`;
+
 const COLOR_SCHEMA = {
   red: '\x1B[31m',
   green: '\x1B[32m',
@@ -35,4 +37,5 @@ module.exports = {
   getFailedReport,
   getTestElapsed,
   TEST_RESULT,
+  FIXTURE,
 };

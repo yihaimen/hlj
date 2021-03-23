@@ -12,7 +12,7 @@ describe('Keyword', () => {
 
   it('should organize test cases with describe', () => {
     const stdout = exec('hlj describe.test.js');
-    expect(stdout).toContain(`${getSuccessfulSuite('PASS')} describe.test.js`);
+    expect(stdout).toContain(`${getSuccessfulSuite('PASS')} fixture/describe.test.js`);
     expect(stdout).toContain(
       `Tests: ${getSuccessfulReport('2 passed')}, 2 total`
     );
