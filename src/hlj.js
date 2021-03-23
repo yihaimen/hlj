@@ -15,6 +15,8 @@ const {
   test,
   describe,
   getPassedCount,
+  getFailedCount,
+  getSkippedCount,
   getTotalCount,
   getTestCaseResults,
 } = require('./core');
@@ -69,10 +71,18 @@ const formatTestResult = (testCaseResults) =>
     )
     .join('\n');
 
-const getPassedCountString = () =>
-  `${getSuccessfulReport(getPassedCount() + ' passed')}, `;
+const getPassedCountString = () => {
+  if (getPassedCount() === 0) return '';
+  return `${getSuccessfulReport(getPassedCount() + ' passed')}, `;
+};
+
+const getSkippedCountString = () => {
+  if (getSkippedCount() === 0) return '';
+  return `${getSkippedCount() + ' skipped'}, `;
+};
+
 const getFailedCountString = () => {
-  const failedCount = getTotalCount() - getPassedCount();
+  const failedCount = getFailedCount();
   if (failedCount === 0) {
     return '';
   }
@@ -111,7 +121,7 @@ ${formatTestResult(getTestCaseResults())}${getDiffMessage(
     isPassed,
     testMessage
   )}
-Tests: ${getFailedCountString()}${getPassedCountString()}${getTotalCount()} total
+Tests: ${getSkippedCountString()}${getFailedCountString()}${getPassedCountString()}${getTotalCount()} total
 ${getExecutionTime()}`;
 };
 
