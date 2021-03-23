@@ -1,3 +1,5 @@
+const FIXTURE = `fixture`;
+
 const COLOR_SCHEMA = {
   red: '\x1B[31m',
   green: '\x1B[32m',
@@ -22,6 +24,9 @@ const getFailedSuite = (text) =>
 const getSuccessfulReport = (text) =>
   `${COLOR_SCHEMA.green}${text}${COLOR_SCHEMA.reset}`;
 
+const getSkippedReport = (text) =>
+  `${text}`;
+
 const getFailedReport = (text) =>
   `${COLOR_SCHEMA.red}${text}${COLOR_SCHEMA.reset}`;
 
@@ -32,7 +37,9 @@ module.exports = {
   getSuccessfulSuite,
   getFailedSuite,
   getSuccessfulReport,
+  getSkippedReport,
   getFailedReport,
   getTestElapsed,
   TEST_RESULT,
+  FIXTURE,
 };

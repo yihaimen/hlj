@@ -5,7 +5,6 @@ let testCaseResults = [];
 const describe = (name, callback) => {
   callback();
 };
-
 const it = (name, callback) => {
   test(name, callback);
 };
@@ -23,6 +22,10 @@ const test = (name, callback) => {
     throw e;
   }
 };
+
+Object.defineProperty(test, 'skip', {value: ()=> {}, writable: true});
+
+const skip = (name, callback) => {};
 
 const getPassedCount = () => {
   return passedCount;
@@ -43,4 +46,5 @@ module.exports = {
   getPassedCount,
   getTotalCount,
   getTestCaseResults,
+  skip,
 };
