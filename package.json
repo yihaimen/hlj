@@ -1,18 +1,14 @@
 {
   "name": "hlj",
-  "version": "0.2.3",
+  "version": "0.3.2",
   "description": "The fastest TDD for JavaScript world, made by Chinese software craftsman.",
   "main": "src/hlj.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "child_process": "^1.0.2"
   },
-  "devDependencies": {
-    "hlj": "^0.2.3"
-  },
   "scripts": {
-    "test": "hlj test/",
-    "hlj:pass": "node src/hlj.js sum.test.js",
-    "hlj:failed": "node src/hlj.js failed.test.js"
+    "test": "node src/hlj.js test/"
   },
   "repository": {
     "type": "git",

@@ -1,9 +1,11 @@
-const { execSync } = require('child_process');
-const exec = (cmd) => {
+const {execSync} = require('child_process');
+const {FIXTURE} = require('./fixtures');
+
+const exec = (arg) => {
   try {
-    return execSync(
-      'node src/' + cmd.split(' ')[0] + '.js' + cmd.substring(cmd.indexOf(' '))
-    ).toString();
+    const command = arg.split(' ')[0];
+    const testCasePath = arg.substring(arg.indexOf(' ') + 1);
+    return execSync(`node src/${command}.js ${testCasePath}`).toString();
   } catch (e) {
     return e;
   }
