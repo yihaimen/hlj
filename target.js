@@ -2,31 +2,35 @@ const testCase = {
   description: 'description',
   status: 'pass|fail|running',
   estimated: 'Int',
-}
+  callback: Function,
+  execute() {
+    this.callback();
+  },
+};
 
 const description = [
   {
     description: 'String',
     status: 'pass|fail|running',
-    testCases: [testCase]
-  }
-]
+    children: [Description | TestCase],
+  },
+];
 
 const testSuite = {
   path: 'String',
   status: 'pass|fail|running',
   statics: {
-    pass: "int",
+    pass: 'int',
     skip: 'int',
-    failed: 'int'
+    failed: 'int',
   },
-  descriptions: [description]
-}
+  descriptions: [description],
+};
 
 const testReport = {
   status: 'String',
-  testSuits: [testSuite]
-}
+  testSuits: [testSuite],
+};
 
 /**
  * TODO:

@@ -1,15 +1,22 @@
+const Description = require('./description');
+const TestCase = require('./testCase');
+
 let passedCount = 0;
 let totalCount = 0;
 let skippedCount = 0;
 let testCaseResults = [];
 
 const describe = (name, callback) => {
+  const description = new Description(name);
+  global.testReport.addDescription(description);
   callback();
 };
 const it = (name, callback) => {
   test(name, callback);
 };
 const test = (name, callback) => {
+  const testCase = new TestCase(name);
+  global.testReport.addTestCase(testCase);
   if (global.testMethod && name !== global.testMethod) {
     return;
   }

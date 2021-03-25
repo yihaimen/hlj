@@ -7,20 +7,22 @@ const { it, test, describe } = require('./core');
 const { expect } = require('./matcher');
 const { getTestResult } = require('./report');
 
-const TestReport = require('./testReport.js')
+const TestReport = require('./testReport.js');
+const TestSuite = require('./testSuite.js');
 
-const runTest = (path, testMethod) => {
+const runTest = (path, testMethod, testReport) => {
   global.test = test;
   global.it = it;
   global.expect = expect;
   global.describe = describe;
   global.testMethod = testMethod;
+  global.testReport = testReport;
 
   const fullPath = process.cwd() + '/' + path;
-  requireTestFile(fullPath);
+  requireTestFile(fullPath, testReport);
 };
 
-const requireTestFile = (path) => {
+const requireTestFile = (path, testReport) => {
   if (isDir(path)) {
     const fileNames = fs.readdirSync(path);
     const testFiles = fileNames.filter((fileName) => isTestFile(fileName));
@@ -33,6 +35,8 @@ const requireTestFile = (path) => {
       requireTestFile(path + '/' + dir);
     });
   } else {
+    const testSuite = new TestSuite();
+    testReport.addTestSuite(testSuite);
     require(path);
   }
 };
@@ -44,18 +48,21 @@ function isDir(fileName) {
 const isTestFile = (fileName) => {
   return fileName.endsWith('.test.js');
 };
-const testReport = new TestReport()
+const testReport = new TestReport();
 
 const startAt = Date.now();
 let isPassed;
 let testMessage;
 try {
-  runTest(fileName, testMethod);
+  runTest(fileName, testMethod, testReport);
   isPassed = true;
 } catch (e) {
+  console.log(e);
   isPassed = false;
   testMessage = JSON.parse(e.message);
 } finally {
   const executionTime = Date.now() - startAt;
-  console.log(getTestResult(fileName, isPassed, testMessage, executionTime, testReport));
+  console.log(
+    getTestResult(fileName, isPassed, testMessage, executionTime, testReport)
+  );
 }
