@@ -7,6 +7,8 @@ const { it, test, describe } = require('./core');
 const { expect } = require('./matcher');
 const { getTestResult } = require('./report');
 
+const TestReport = require('./testReport.js')
+
 const runTest = (path, testMethod) => {
   global.test = test;
   global.it = it;
@@ -42,6 +44,7 @@ function isDir(fileName) {
 const isTestFile = (fileName) => {
   return fileName.endsWith('.test.js');
 };
+const testReport = new TestReport()
 
 const startAt = Date.now();
 let isPassed;
@@ -54,5 +57,5 @@ try {
   testMessage = JSON.parse(e.message);
 } finally {
   const executionTime = Date.now() - startAt;
-  console.log(getTestResult(fileName, isPassed, testMessage, executionTime));
+  console.log(getTestResult(fileName, isPassed, testMessage, executionTime, testReport));
 }

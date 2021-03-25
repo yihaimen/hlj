@@ -8,7 +8,8 @@
     "child_process": "^1.0.2"
   },
   "scripts": {
-    "test": "node src/hlj.js test/"
+    "test": "node src/hlj.js test/",
+    "testSuite": "node src/hlj.js ./test/suite.test.js"
   },
   "repository": {
     "type": "git",
