@@ -1,53 +1,79 @@
 const { FIXTURE } = require('./fixtures');
 const TestReport = require('../src/testReport');
 const TestSuite = require('../src/testSuite');
+const Parser = require('../src/parser');
 
 describe('Parser', () => {
-  it('parse test case when has one description', () => {
-    global.testReport = new TestReport();
-    const testSuite = new TestSuite();
-    global.testReport.addTestSuite(testSuite);
+  it('parse test case when has one fixture', () => {
+    const parser = new Parser();
 
-    require(`../${FIXTURE}/suites.test.js`);
+    const testReport = parser.parse([`${FIXTURE}/suites.test.js`]);
 
-    const testReport = global.testReport;
     expect(testReport.getTotalSuites()).toBe(1);
+    expect(testReport.getSuite(0).getPath()).toBe(`${FIXTURE}/suites.test.js`);
     expect(testReport.getTotalTestCases()).toBe(2);
+    expect(testReport.getSuite(0).getDescription(0).getName()).toBe('Keyword');
+    expect(
+      testReport.getSuite(0).getDescription(0).getTestCase(0).getName()
+    ).toBe('1 is equal to 1');
+    expect(
+      testReport.getSuite(0).getDescription(0).getTestCase(1).getName()
+    ).toBe('2 is equal to 2');
   });
 
   it('parse test cases when has multiple describe', () => {
-    global.testReport = new TestReport();
-    const testSuite = new TestSuite();
-    global.testReport.addTestSuite(testSuite);
+    const parser = new Parser();
 
-    require(`../${FIXTURE}/multiple-describe.test.js`);
+    const testReport = parser.parse([`${FIXTURE}/multiple-describe.test.js`]);
 
-    const testReport = global.testReport;
     expect(testReport.getTotalSuites()).toBe(1);
     expect(testReport.getTotalTestCases()).toBe(2);
+    expect(testReport.getSuite(0).getDescription(0).getName()).toBe(
+      'Keyword 1'
+    );
+    expect(
+      testReport.getSuite(0).getDescription(0).getTestCase(0).getName()
+    ).toBe('1 is equal to 1');
+    expect(testReport.getSuite(0).getDescription(1).getName()).toBe(
+      'Keyword 2'
+    );
+    expect(
+      testReport.getSuite(0).getDescription(1).getTestCase(0).getName()
+    ).toBe('2 is equal to 2');
+    expect(
+      typeof testReport
+        .getSuite(0)
+        .getDescription(1)
+        .getTestCase(0)
+        .getCallback()
+    ).toBe('function');
   });
 
   it('parse test cases when has nested describes', () => {
-    global.testReport = new TestReport();
-    const testSuite = new TestSuite();
-    global.testReport.addTestSuite(testSuite);
+    const parser = new Parser();
 
-    require(`../${FIXTURE}/nested-describes.test.js`);
+    const testReport = parser.parse([`${FIXTURE}/nested-describes.test.js`]);
 
-    const testReport = global.testReport;
     expect(testReport.getTotalSuites()).toBe(1);
     expect(testReport.getTotalTestCases()).toBe(2);
   });
 
   it('parse test cases when has mixed test case and describe', () => {
-    global.testReport = new TestReport();
-    const testSuite = new TestSuite();
-    global.testReport.addTestSuite(testSuite);
+    const parser = new Parser();
 
-    require(`../${FIXTURE}/mixed.test.js`);
+    const testReport = parser.parse([`${FIXTURE}/mixed.test.js`]);
 
-    const testReport = global.testReport;
     expect(testReport.getTotalSuites()).toBe(1);
     expect(testReport.getTotalTestCases()).toBe(2);
+  });
+
+  it('parse test case when has multiple fixtures', () => {
+    const parser = new Parser();
+
+    const files = [`${FIXTURE}/suites.test.js`, `${FIXTURE}/mixed.test.js`];
+    const testReport = parser.parse(files);
+
+    expect(testReport.getTotalSuites()).toBe(2);
+    expect(testReport.getTotalTestCases()).toBe(4);
   });
 });

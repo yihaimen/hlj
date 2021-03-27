@@ -1,5 +1,6 @@
 class Description {
-  constructor() {
+  constructor(name) {
+    this.name = name;
     this.testCases = [];
   }
 
@@ -9,6 +10,14 @@ class Description {
 
   addTestCase(testCase) {
     this.testCases.push(testCase);
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  getTestCase(index) {
+    return this.testCases[index];
   }
 }
 

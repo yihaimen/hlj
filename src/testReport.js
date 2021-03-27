@@ -31,6 +31,10 @@ class TestReport {
       return count + testSuite.getTotalTestCases();
     }, 0);
   }
+
+  getSuite(index) {
+    return this.testSuites[index];
+  }
 }
 
 module.exports = TestReport;

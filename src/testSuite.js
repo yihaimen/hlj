@@ -1,5 +1,6 @@
 class TestSuite {
-  constructor() {
+  constructor(path) {
+    this.path = path;
     this.status = '';
     this.descriptions = [];
   }
@@ -24,6 +25,18 @@ class TestSuite {
 
   addTestCase(testCase) {
     this.descriptions[this.descriptions.length - 1].addTestCase(testCase);
+  }
+
+  getPath() {
+    return this.path;
+  }
+
+  getDescription(index) {
+    return this.descriptions[index];
+  }
+
+  setPath(path) {
+    this.path =  path;
   }
 }
 
