@@ -5,11 +5,19 @@ class Description {
   }
 
   getTotalTestCases() {
-    return this.children.length;
+    return this.children.reduce((count, child) => {
+      if (!child.children) {
+        return count + 1;
+      }
+      return count + child.getTotalTestCases();
+    }, 0);
   }
 
   addChild(testCase) {
     this.children.push(testCase);
+  }
+  appendChildren(children) {
+    this.children.concat(children);
   }
 
   getName() {

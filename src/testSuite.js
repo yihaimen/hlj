@@ -1,8 +1,13 @@
 class TestSuite {
-  constructor(path) {
+  constructor(path, children) {
     this.path = path;
     this.status = '';
     this.descriptions = [];
+    this.children = children;
+  }
+
+  addChild(child) {
+    this.children.push(child);
   }
 
   addDescription(description) {
@@ -18,8 +23,11 @@ class TestSuite {
   }
 
   getTotalTestCases() {
-    return this.descriptions.reduce((count, description) => {
-      return count + description.getTotalTestCases();
+    return this.children.reduce((count, child) => {
+      if (!child.children) {
+        return count + 1;
+      }
+      return count + child.getTotalTestCases();
     }, 0);
   }
 
@@ -35,8 +43,12 @@ class TestSuite {
     return this.descriptions[index];
   }
 
+  getChild(index) {
+    return this.children[index];
+  }
+
   setPath(path) {
-    this.path =  path;
+    this.path = path;
   }
 }
 

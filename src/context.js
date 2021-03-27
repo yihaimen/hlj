@@ -2,12 +2,14 @@ const TestSuite = require('../src/testSuite');
 const TestCase = require('../src/testCase');
 const Description = require('../src/description');
 const vm = require('vm');
-const callee = require('callee');
+
+let tempChildren = [];
+
 class Context {
   create() {
     const defaultDescription = new Description('');
-    const testSuite = new TestSuite();
-    testSuite.addDescription(defaultDescription);
+    const testSuite = new TestSuite('', tempChildren);
+    // testSuite.addDescription(defaultDescription);
 
     const obj = {
       descriptions: [defaultDescription],
@@ -26,16 +28,18 @@ class Context {
 
   describe(name, callback) {
     const description = new Description(name);
-    this.context.testSuite.addDescription(description);
-
-    this.context.descriptions.unshift(description);
+    // this.context.testSuite.addDescription(description);
+    tempChildren.unshift([]);
+    // this.context.descriptions.unshift(description);
     callback();
-    this.context.descriptions.shift();
+    description.appendChildren(tempChildren[0]);
+    tempChildren.shift();
+    tempChildren.unshift(description);
   }
 
   test(name, callback) {
     const testCase = new TestCase(name, callback);
-    this.context.descriptions[0].addChild(testCase);
+    tempChildren[0].push(testCase);
   }
 }
 
