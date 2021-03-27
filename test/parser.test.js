@@ -63,6 +63,11 @@ describe('Parser', () => {
 
     const testReport = parser.parse([`${FIXTURE}/mixed.test.js`]);
 
+    expect(testReport.getSuite(0).getDescription(0).getName()).toBe('Keyword');
+    expect(testReport.getSuite(0).getDescription(1).getName()).toBe('1 ');
+    expect(
+      testReport.getSuite(0).getDescription(0).getTestCase(0).getName()
+    ).toBe('2');
     expect(testReport.getTotalSuites()).toBe(1);
     expect(testReport.getTotalTestCases()).toBe(2);
   });

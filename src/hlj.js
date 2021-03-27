@@ -10,9 +10,8 @@ const { getTestResult } = require('./report');
 const TestReport = require('./testReport.js');
 const TestSuite = require('./testSuite.js');
 
+const files = [];
 const runTest = (path, testMethod, testReport) => {
-  global.test = test;
-  global.it = it;
   global.expect = expect;
   global.describe = describe;
   global.testMethod = testMethod;
@@ -27,17 +26,18 @@ const requireTestFile = (path, testReport) => {
     const fileNames = fs.readdirSync(path);
     const testFiles = fileNames.filter((fileName) => isTestFile(fileName));
     testFiles.forEach((fileName) => {
-      require(path + '/' + fileName);
+      files.push(path + '/' + fileName);
     });
+
+    const testReport = new Parser().parse(files);
+    console.log(testReport);
 
     const childDirs = fileNames.filter((fileName) => !fileName.endsWith('.js'));
     childDirs.forEach((dir) => {
-      requireTestFile(path + '/' + dir);
+      files.push(path + '/' + fileName);
     });
   } else {
-    const testSuite = new TestSuite();
-    testReport.addTestSuite(testSuite);
-    require(path);
+    files.push(path);
   }
 };
 

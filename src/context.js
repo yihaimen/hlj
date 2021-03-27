@@ -2,6 +2,7 @@ const TestSuite = require('../src/testSuite');
 const TestCase = require('../src/testCase');
 const Description = require('../src/description');
 const vm = require('vm');
+const callee = require('callee');
 class Context {
   create() {
     const obj = {
