@@ -1,23 +1,23 @@
 class Description {
   constructor(name) {
     this.name = name;
-    this.testCases = [];
+    this.children = [];
   }
 
   getTotalTestCases() {
-    return this.testCases.length;
+    return this.children.length;
   }
 
-  addTestCase(testCase) {
-    this.testCases.push(testCase);
+  addChild(testCase) {
+    this.children.push(testCase);
   }
 
   getName() {
     return this.name;
   }
 
-  getTestCase(index) {
-    return this.testCases[index];
+  getChild(index) {
+    return this.children[index];
   }
 }
 

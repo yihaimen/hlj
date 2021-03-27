@@ -11,7 +11,7 @@ const TestReport = require('./testReport.js');
 const TestSuite = require('./testSuite.js');
 
 const files = [];
-const runTest = (path, testMethod, testReport) => {
+const runTest = (path, testMethod) => {
   global.expect = expect;
   global.describe = describe;
   global.testMethod = testMethod;
@@ -19,6 +19,9 @@ const runTest = (path, testMethod, testReport) => {
 
   const fullPath = process.cwd() + '/' + path;
   requireTestFile(fullPath, testReport);
+
+  const testReport = new Parser().parse(files);
+  console.log(testReport);
 };
 
 const requireTestFile = (path, testReport) => {
@@ -28,9 +31,6 @@ const requireTestFile = (path, testReport) => {
     testFiles.forEach((fileName) => {
       files.push(path + '/' + fileName);
     });
-
-    const testReport = new Parser().parse(files);
-    console.log(testReport);
 
     const childDirs = fileNames.filter((fileName) => !fileName.endsWith('.js'));
     childDirs.forEach((dir) => {
@@ -48,7 +48,6 @@ function isDir(fileName) {
 const isTestFile = (fileName) => {
   return fileName.endsWith('.test.js');
 };
-const testReport = new TestReport();
 
 const startAt = Date.now();
 let isPassed;

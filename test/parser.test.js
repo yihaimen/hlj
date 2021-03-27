@@ -12,13 +12,13 @@ describe('Parser', () => {
     expect(testReport.getTotalSuites()).toBe(1);
     expect(testReport.getSuite(0).getPath()).toBe(`${FIXTURE}/suites.test.js`);
     expect(testReport.getTotalTestCases()).toBe(2);
-    expect(testReport.getSuite(0).getDescription(0).getName()).toBe('Keyword');
-    expect(
-      testReport.getSuite(0).getDescription(0).getTestCase(0).getName()
-    ).toBe('1 is equal to 1');
-    expect(
-      testReport.getSuite(0).getDescription(0).getTestCase(1).getName()
-    ).toBe('2 is equal to 2');
+    expect(testReport.getSuite(0).getDescription(1).getName()).toBe('Keyword');
+    expect(testReport.getSuite(0).getDescription(1).getChild(0).getName()).toBe(
+      '1 is equal to 1'
+    );
+    expect(testReport.getSuite(0).getDescription(1).getChild(1).getName()).toBe(
+      '2 is equal to 2'
+    );
   });
 
   it('parse test cases when has multiple describe', () => {
@@ -28,24 +28,20 @@ describe('Parser', () => {
 
     expect(testReport.getTotalSuites()).toBe(1);
     expect(testReport.getTotalTestCases()).toBe(2);
-    expect(testReport.getSuite(0).getDescription(0).getName()).toBe(
+    expect(testReport.getSuite(0).getDescription(1).getName()).toBe(
       'Keyword 1'
     );
-    expect(
-      testReport.getSuite(0).getDescription(0).getTestCase(0).getName()
-    ).toBe('1 is equal to 1');
-    expect(testReport.getSuite(0).getDescription(1).getName()).toBe(
+    expect(testReport.getSuite(0).getDescription(1).getChild(0).getName()).toBe(
+      '1 is equal to 1'
+    );
+    expect(testReport.getSuite(0).getDescription(2).getName()).toBe(
       'Keyword 2'
     );
+    expect(testReport.getSuite(0).getDescription(2).getChild(0).getName()).toBe(
+      '2 is equal to 2'
+    );
     expect(
-      testReport.getSuite(0).getDescription(1).getTestCase(0).getName()
-    ).toBe('2 is equal to 2');
-    expect(
-      typeof testReport
-        .getSuite(0)
-        .getDescription(1)
-        .getTestCase(0)
-        .getCallback()
+      typeof testReport.getSuite(0).getDescription(2).getChild(0).getCallback()
     ).toBe('function');
   });
 
@@ -54,8 +50,23 @@ describe('Parser', () => {
 
     const testReport = parser.parse([`${FIXTURE}/nested-describes.test.js`]);
 
+    console.log(testReport.getSuite(0).getDescription(1));
+
     expect(testReport.getTotalSuites()).toBe(1);
     expect(testReport.getTotalTestCases()).toBe(2);
+    expect(testReport.getSuite(0).getDescription(1).getName()).toBe('Keyword');
+    expect(testReport.getSuite(0).getDescription(1).getChild(0).getName()).toBe(
+      'Keyword 1'
+    );
+    expect(
+      testReport.getSuite(0).getDescription(1).getChild(0).getChild(0).getName()
+    ).toBe('1 is equal to 1');
+    expect(testReport.getSuite(0).getDescription(2).getChild(0).getName()).toBe(
+      'Keyword 2'
+    );
+    expect(
+      testReport.getSuite(0).getDescription(2).getChild(0).getChild(0).getName()
+    ).toBe('2 is equal to 2');
   });
 
   it('parse test cases when has mixed test case and describe', () => {
@@ -65,9 +76,9 @@ describe('Parser', () => {
 
     expect(testReport.getSuite(0).getDescription(0).getName()).toBe('Keyword');
     expect(testReport.getSuite(0).getDescription(1).getName()).toBe('1 ');
-    expect(
-      testReport.getSuite(0).getDescription(0).getTestCase(0).getName()
-    ).toBe('2');
+    expect(testReport.getSuite(0).getDescription(0).getChild(0).getName()).toBe(
+      '2'
+    );
     expect(testReport.getTotalSuites()).toBe(1);
     expect(testReport.getTotalTestCases()).toBe(2);
   });

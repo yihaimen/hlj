@@ -5,8 +5,13 @@ const vm = require('vm');
 const callee = require('callee');
 class Context {
   create() {
+    const defaultDescription = new Description('');
+    const testSuite = new TestSuite();
+    testSuite.addDescription(defaultDescription);
+
     const obj = {
-      testSuite: new TestSuite(),
+      descriptions: [defaultDescription],
+      testSuite,
       describe: (name, callback) => {
         this.describe(name, callback);
       },
@@ -22,12 +27,15 @@ class Context {
   describe(name, callback) {
     const description = new Description(name);
     this.context.testSuite.addDescription(description);
-    callback(description);
+
+    this.context.descriptions.unshift(description);
+    callback();
+    this.context.descriptions.shift();
   }
 
   test(name, callback) {
     const testCase = new TestCase(name, callback);
-    this.context.testSuite.addTestCase(testCase);
+    this.context.descriptions[0].addChild(testCase);
   }
 }
 
