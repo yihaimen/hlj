@@ -21,5 +21,5 @@ const testReport = new Parser().parse(files);
 
 testReport.execute();
 
-const result = new ConsoleReporter(testReport).render();
+const result = new ConsoleReporter(process.cwd() + '/', testReport).render();
 console.log(result);

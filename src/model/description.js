@@ -27,6 +27,37 @@ class Description {
 
   execute() {
     this.children.forEach((child) => child.execute());
+    this.updateStatus();
+  }
+
+  updateStatus() {
+    if (this.children.every((child) => child.isPassed())) {
+      this.status.pass();
+    } else {
+      this.status.fail();
+    }
+  }
+
+  isPassed() {
+    return this.status.isPassed();
+  }
+
+  getPassedCount() {
+    return this.children
+      .map((child) => child.getPassedCount())
+      .reduce((a, b) => a + b, 0);
+  }
+
+  getTotalCount() {
+    return this.children
+      .map((child) => child.getTotalCount())
+      .reduce((a, b) => a + b, 0);
+  }
+
+  getSkippedCount() {
+    return this.children
+      .map((child) => child.getSkippedCount())
+      .reduce((a, b) => a + b, 0);
   }
 }
 

@@ -4,7 +4,7 @@ const {
   getSuccessfulReport,
   getFailedReport,
   getTestElapsed,
-} = require('./render');
+} = require('./report/render');
 
 const { TEST_RESULT } = require('./constant');
 
@@ -72,16 +72,21 @@ const renderByStatus = (
     : `${getFailedSuite(failedMessage)} `;
 };
 
-
-
-
-const getTestResult = (fileName, isPassed, testMessage = {}, executionTime, testReport) => {
+const getTestResult = (
+  fileName,
+  isPassed,
+  testMessage = {},
+  executionTime,
+  testReport
+) => {
   return `${renderByStatus(isPassed)}${fileName}
 ${formatTestResult(getTestCaseResults())}${getDiffMessage(
     isPassed,
     testMessage
   )}
-Test Suites: ${getSuccessfulReport(`${testReport.getPassedSuites()} passed`)}, ${testReport.getTotalSuites()} total
+Test Suites: ${getSuccessfulReport(
+    `${testReport.getPassedSuites()} passed`
+  )}, ${testReport.getTotalSuites()} total
 Tests: ${getSkippedCountString()}${getFailedCountString()}${getPassedCountString()}${getTotalCount()} total
 ${getExecutionTime(executionTime)}`;
 };
