@@ -3,6 +3,7 @@ class TestCase {
     this.name = name;
     this.callback = callback;
   }
+
   getName() {
     return this.name;
   }

@@ -13,10 +13,6 @@ class Description {
     }, 0);
   }
 
-  addChild(testCase) {
-    this.children.push(testCase);
-  }
-
   setChildren(children) {
     this.children = children;
   }

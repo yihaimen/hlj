@@ -5,8 +5,6 @@ const vm = require('vm');
 
 class Context {
   create() {
-    const defaultDescription = new Description('');
-
     const tempChildren = [];
     const testSuite = new TestSuite('', tempChildren);
 

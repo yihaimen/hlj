@@ -1,6 +1,4 @@
 const { FIXTURE } = require('./fixtures');
-const TestReport = require('../src/testReport');
-const TestSuite = require('../src/testSuite');
 const Parser = require('../src/parser');
 
 describe('Parser', () => {
@@ -119,6 +117,8 @@ describe('Parser', () => {
     const files = [`${FIXTURE}/suites.test.js`, `${FIXTURE}/mixed.test.js`];
     const testReport = parser.parse(files);
 
+    expect(testReport.getSuite(0).getPath()).toBe('fixture/suites.test.js');
+    expect(testReport.getSuite(1).getPath()).toBe('fixture/mixed.test.js');
     expect(testReport.getTotalSuites()).toBe(2);
     expect(testReport.getTotalTestCases()).toBe(5);
   });

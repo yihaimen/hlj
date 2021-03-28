@@ -6,14 +6,6 @@ class TestSuite {
     this.children = children;
   }
 
-  addChild(child) {
-    this.children.push(child);
-  }
-
-  addDescription(description) {
-    this.descriptions.push(description);
-  }
-
   isPassed() {
     return this.status === 'pass';
   }
@@ -31,16 +23,8 @@ class TestSuite {
     }, 0);
   }
 
-  addTestCase(testCase) {
-    this.descriptions[this.descriptions.length - 1].addTestCase(testCase);
-  }
-
   getPath() {
     return this.path;
-  }
-
-  getDescription(index) {
-    return this.descriptions[index];
   }
 
   getChild(index) {
