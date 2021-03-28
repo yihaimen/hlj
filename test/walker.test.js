@@ -1,5 +1,13 @@
 const Walker = require('../src/walker');
 describe('Walker', () => {
+  it('should keep test file', () => {
+    const files = new Walker().walk(
+      process.cwd() + '/fixture/test-dir/test-matcher.test.js'
+    );
+    expect(files.length).toBe(1);
+    expect(files[0].endsWith('test-matcher.test.js')).toBe(true);
+  });
+
   it('should exclude normal js files', () => {
     const files = new Walker().walk(
       process.cwd() + '/fixture/test-dir/test-matcher-3.js'

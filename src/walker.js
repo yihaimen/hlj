@@ -8,7 +8,7 @@ class Walker {
   walk(path) {
     if (this.isTestFile(path)) {
       this.files.push(path);
-      return;
+      return this.files;
     }
 
     if (this.isDir(path)) {
