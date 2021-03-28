@@ -39,9 +39,11 @@ class ConsoleReporter {
   }
 
   suiteResult() {
-    return this.testReport.testSuites
-      .map((testSuite) => this.formatTestSuite(testSuite))
-      .join('\n');
+    return (
+      this.testReport.testSuites
+        .map((testSuite) => this.formatTestSuite(testSuite))
+        .join('\n') + '\n'
+    );
   }
 
   formatTestSuite(testSuite) {

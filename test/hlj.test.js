@@ -33,7 +33,7 @@ describe('JavaScript TDD framework', () => {
           `  ${getSuccessfulReport('✓')} 1 plus 2 is 3\n` +
           `  ${getFailedReport('x')} 2 plus 2 is 5\n` +
           `  Expected: ${getSuccessfulReport(5)}\n` +
-          `  Received: ${getFailedReport(4)}\n` +
+          `  Received: ${getFailedReport(4)}\n\n` +
           `Test Suites: ${getSuccessfulReport('1 passed')}, 1 total\n` +
           `Tests: ${getFailedReport('1 failed')}, ${getSuccessfulReport(
             '1 passed'
