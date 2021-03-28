@@ -7,11 +7,11 @@ const { it, test, describe } = require('./core');
 const { expect } = require('./matcher');
 const { getTestResult } = require('./report');
 
-const TestReport = require('./testReport.js');
-const TestSuite = require('./testSuite.js');
+const TestReport = require('./model/testReport.js');
+const TestSuite = require('./model/testSuite.js');
 
 const files = [];
-const runTest = (path, testMethod) => {
+const runTest = (path, testMethod, testReport) => {
   global.expect = expect;
   global.describe = describe;
   global.testMethod = testMethod;
@@ -20,8 +20,7 @@ const runTest = (path, testMethod) => {
   const fullPath = process.cwd() + '/' + path;
   requireTestFile(fullPath, testReport);
 
-  const testReport = new Parser().parse(files);
-  console.log(testReport);
+  //const report = new Parser().parse(files);
 };
 
 const requireTestFile = (path, testReport) => {
@@ -48,6 +47,7 @@ function isDir(fileName) {
 const isTestFile = (fileName) => {
   return fileName.endsWith('.test.js');
 };
+const testReport = new TestReport();
 
 const startAt = Date.now();
 let isPassed;

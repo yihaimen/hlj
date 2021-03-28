@@ -1,6 +1,6 @@
-const TestSuite = require('../src/testSuite');
-const TestCase = require('../src/testCase');
-const Description = require('../src/description');
+const TestSuite = require('../model/testSuite');
+const TestCase = require('../model/testCase');
+const Description = require('../model/description');
 const vm = require('vm');
 
 class Context {

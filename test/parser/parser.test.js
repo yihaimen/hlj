@@ -1,5 +1,5 @@
-const { FIXTURE } = require('./fixtures');
-const Parser = require('../src/parser');
+const { FIXTURE } = require('../helper/fixtures');
+const Parser = require('../src/parser/parser');
 
 describe('Parser', () => {
   it('should parse one fixture', () => {

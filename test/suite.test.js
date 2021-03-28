@@ -1,8 +1,8 @@
-const Description = require('../src/description');
-const TestCase = require('../src/testCase');
-const TestSuite = require('../src/testSuite');
-const { exec } = require('./exec');
-const { FIXTURE, getSuccessfulReport } = require('./fixtures');
+const Description = require('../src/model/description');
+const TestCase = require('../src/model/testCase');
+const TestSuite = require('../src/model/testSuite');
+const { exec } = require('./helper/exec');
+const { FIXTURE, getSuccessfulReport } = require('./helper/fixtures');
 
 describe('test suites', () => {
   it('should print Test Suites when test 1 test.js', function () {

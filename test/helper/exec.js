@@ -1,5 +1,4 @@
-const {execSync} = require('child_process');
-const {FIXTURE} = require('./fixtures');
+const { execSync } = require('child_process');
 
 const exec = (arg) => {
   try {

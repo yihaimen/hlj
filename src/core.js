@@ -1,5 +1,5 @@
-const Description = require('./description');
-const TestCase = require('./testCase');
+const Description = require('./model/description');
+const TestCase = require('./model/testCase');
 
 let passedCount = 0;
 let totalCount = 0;

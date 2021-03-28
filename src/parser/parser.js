@@ -1,5 +1,5 @@
-const TestReport = require('../src/testReport');
-const Context = require('../src/context');
+const TestReport = require('../model/testReport');
+const Context = require('./context');
 const fs = require('fs');
 const vm = require('vm');
 

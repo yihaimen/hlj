@@ -1,5 +1,5 @@
-const { exec } = require('./exec');
-const { getSuccessfulReport, FIXTURE } = require('./fixtures');
+const { exec } = require('./helper/exec');
+const { getSuccessfulReport, FIXTURE } = require('./helper/fixtures');
 it('should specify test to run', () => {
   // hlj xxx.test xxx
   const stdout = exec(`hlj ${FIXTURE}/specify-test-method.test.js 'test 1'`);

@@ -1,11 +1,11 @@
-const { exec } = require('./exec');
+const { exec } = require('./helper/exec');
 const {
   getSuccessfulReport,
   getSuccessfulSuite,
   getFailedReport,
   getFailedSuite,
   FIXTURE,
-} = require('./fixtures');
+} = require('./helper/fixtures');
 describe('JavaScript TDD framework', () => {
   it('is a CLI program', () => {
     const stdout = exec(`hlj ${FIXTURE}/sum.test.js`);

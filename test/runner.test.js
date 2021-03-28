@@ -1,5 +1,5 @@
-const { exec } = require('./exec');
-const { getSuccessfulReport, FIXTURE } = require('./fixtures');
+const { exec } = require('./helper/exec');
+const { getSuccessfulReport, FIXTURE } = require('./helper/fixtures');
 describe('Runner', () => {
   describe('Run tests in directory', () => {
     it('should run all .test.js files in specified directory', () => {
