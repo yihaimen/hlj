@@ -14,6 +14,10 @@ class Status {
     this.status = 'failed';
   }
 
+  skip() {
+    this.status = 'skipped';
+  }
+
   isPassed() {
     return this.status === 'passed';
   }

@@ -1,10 +1,4 @@
-const {
-  getSuccessfulSuite,
-  getFailedSuite,
-  green,
-  red,
-  yellow,
-} = require('./render');
+const { pass, fail, skip, green, red, yellow, time } = require('./render');
 
 const { TEST_RESULT } = require('./constant');
 
@@ -41,7 +35,7 @@ class ConsoleReporter {
   }
 
   excutionTime() {
-    return `Time: ${yellow(this.testReport.getExcutionTime() / 1000)}`;
+    return `Time: ${time(this.testReport.getExcutionTime() / 1000)}`;
   }
 
   suiteResult() {
@@ -55,9 +49,9 @@ class ConsoleReporter {
       .map((child) => this.formatChild(child))
       .join('\n');
 
-    return `${this.renderByStatus(
-      testSuite.isPassed()
-    )}${testSuite.getPath().replace(this.workingDir, '')}\n${childrenResult}\n`;
+    return `${this.renderByStatus(testSuite)} ${testSuite
+      .getPath()
+      .replace(this.workingDir, '')}\n${childrenResult}\n`;
   }
 
   formatChild(child) {
@@ -69,6 +63,10 @@ class ConsoleReporter {
   }
 
   formatTestCase(testCase) {
+    if (testCase.getStatus().isSkipped()) {
+      return '';
+    }
+
     const icon = testCase.getStatus().isPassed()
       ? green(TEST_RESULT.PASS)
       : red(TEST_RESULT.FAIL);
@@ -97,7 +95,7 @@ class ConsoleReporter {
 
   getSkippedCountString(count) {
     if (count === 0) return '';
-    return `${count + ' skipped'}, `;
+    return `${yellow(count + ' skipped')}, `;
   }
 
   getFailedCountString(failedCount) {
@@ -118,10 +116,12 @@ class ConsoleReporter {
     )}`;
   }
 
-  renderByStatus(isPassed, passedMessage = 'PASS', failedMessage = 'FAIL') {
-    return isPassed
-      ? `${getSuccessfulSuite(passedMessage)} `
-      : `${getFailedSuite(failedMessage)} `;
+  renderByStatus(testSuite) {
+    if (testSuite.isPassed()) {
+      return pass('PASS');
+    }
+
+    return fail('FAIL');
   }
 }
 module.exports = ConsoleReporter;

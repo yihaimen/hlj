@@ -8,10 +8,6 @@ class TestSuite {
     this.children = children;
   }
 
-  isPassed() {
-    return this.status === 'pass';
-  }
-
   setStatus(status) {
     this.status = status;
   }
@@ -63,7 +59,9 @@ class TestSuite {
   }
 
   isPassed() {
-    return this.status.isPassed();
+    return (
+      this.getSkippedCount() + this.getPassedCount() === this.getTotalCount()
+    );
   }
 
   getStatus() {

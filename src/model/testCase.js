@@ -19,6 +19,11 @@ class TestCase {
   }
 
   execute() {
+    if (!this.callback) {
+      this.status.skip();
+      return;
+    }
+
     try {
       this.callback();
       this.status.pass();

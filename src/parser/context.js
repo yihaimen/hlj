@@ -29,6 +29,14 @@ class Context {
       },
       expect,
     };
+
+    Object.defineProperty(obj.test, 'skip', {
+      value: (name, callback) => {
+        this.skip(name, callback);
+      },
+      writable: true,
+    });
+
     this.context = vm.createContext(obj);
     return this.context;
   }
@@ -44,6 +52,11 @@ class Context {
 
   test(name, callback) {
     const testCase = new TestCase(name, callback);
+    this.appendToParent(testCase);
+  }
+
+  skip(name, _callback) {
+    const testCase = new TestCase(name);
     this.appendToParent(testCase);
   }
 

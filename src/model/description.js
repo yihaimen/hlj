@@ -27,19 +27,10 @@ class Description {
 
   execute() {
     this.children.forEach((child) => child.execute());
-    this.updateStatus();
-  }
-
-  updateStatus() {
-    if (this.children.every((child) => child.isPassed())) {
-      this.status.pass();
-    } else {
-      this.status.fail();
-    }
   }
 
   isPassed() {
-    return this.status.isPassed();
+    return this.children.every((child) => child.isPassed());
   }
 
   getPassedCount() {
