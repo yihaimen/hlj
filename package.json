@@ -7,8 +7,7 @@
     "child_process": "^1.0.2"
   },
   "scripts": {
-    "test": "node src/hlj.js test/",
-    "testSuite": "node src/hlj.js ./test/suite.test.js"
+    "test": "node src/hlj.js test"
   },
   "repository": {
     "type": "git",
@@ -18,12 +17,7 @@
     "url": "https://github.com/codingstyle-cn/hlj/issues"
   },
   "homepage": "https://github.com/codingstyle-cn/hlj",
-  "keywords": [
-    "TDD",
-    "Jest",
-    "Mocha",
-    "JavaScript unit test"
-  ],
+  "keywords": ["TDD", "Jest", "Mocha", "JavaScript unit test"],
   "bin": {
     "hlj": "./src/hlj.js"
   },

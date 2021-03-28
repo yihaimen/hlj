@@ -12,9 +12,10 @@ class Walker {
     }
 
     if (this.isDir(path)) {
+      const completedPath = path.endsWith('/') ? path : path + '/';
       const fileNames = fs.readdirSync(path);
       fileNames.forEach((fileName) => {
-        this.walk(path + '/' + fileName);
+        this.walk(completedPath + fileName);
       });
     }
     return this.files;

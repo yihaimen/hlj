@@ -28,6 +28,7 @@ class Context {
         return require(this.path + '/' + name);
       },
       expect,
+      process,
     };
 
     Object.defineProperty(obj.test, 'skip', {
