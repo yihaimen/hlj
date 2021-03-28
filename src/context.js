@@ -19,6 +19,9 @@ class Context {
       it: (name, callback) => {
         this.test(name, callback);
       },
+      test: (name, callback) => {
+        this.test(name, callback);
+      },
     };
 
     this.context = vm.createContext(obj);

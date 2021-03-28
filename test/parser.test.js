@@ -4,7 +4,7 @@ const TestSuite = require('../src/testSuite');
 const Parser = require('../src/parser');
 
 describe('Parser', () => {
-  it('parse test case when has one fixture', () => {
+  it('should parse one fixture', () => {
     const parser = new Parser();
 
     const testReport = parser.parse([`${FIXTURE}/suites.test.js`]);
@@ -21,7 +21,7 @@ describe('Parser', () => {
     );
   });
 
-  it('parse test cases when has multiple describe', () => {
+  it('should parse multiple describes', () => {
     const parser = new Parser();
 
     const testReport = parser.parse([`${FIXTURE}/multiple-describe.test.js`]);
@@ -41,7 +41,7 @@ describe('Parser', () => {
     ).toBe('function');
   });
 
-  it('parse test cases when has nested describes', () => {
+  it('should parse nested describes', () => {
     const parser = new Parser();
 
     const testReport = parser.parse([`${FIXTURE}/nested-describes.test.js`]);
@@ -63,7 +63,7 @@ describe('Parser', () => {
     ).toBe('2 is equal to 2');
   });
 
-  it('parse test cases when has mixed test case and describe', () => {
+  it('should parse mixed test case and describe at same level', () => {
     const parser = new Parser();
 
     const testReport = parser.parse([`${FIXTURE}/mixed.test.js`]);
@@ -82,7 +82,7 @@ describe('Parser', () => {
     expect(testReport.getTotalTestCases()).toBe(3);
   });
 
-  it('parse test cases when has multiple nested mixed test case and describe', () => {
+  it('should parse multiple nested mixed test case and describe', () => {
     const parser = new Parser();
 
     const testReport = parser.parse([`${FIXTURE}/really-complex.test.js`]);
@@ -113,7 +113,7 @@ describe('Parser', () => {
     );
   });
 
-  it('parse test case when has multiple fixtures', () => {
+  it('should parse multiple fixtures', () => {
     const parser = new Parser();
 
     const files = [`${FIXTURE}/suites.test.js`, `${FIXTURE}/mixed.test.js`];
@@ -121,5 +121,16 @@ describe('Parser', () => {
 
     expect(testReport.getTotalSuites()).toBe(2);
     expect(testReport.getTotalTestCases()).toBe(5);
+  });
+
+  describe('Alias', () => {
+    it("both 'test' and 'it' are test case", () => {
+      const parser = new Parser();
+
+      const testReport = parser.parse([`${FIXTURE}/alias.test.js`]);
+
+      expect(testReport.getTotalSuites()).toBe(1);
+      expect(testReport.getTotalTestCases()).toBe(2);
+    });
   });
 });
