@@ -16,8 +16,9 @@ class Description {
   addChild(testCase) {
     this.children.push(testCase);
   }
-  appendChildren(children) {
-    this.children.concat(children);
+
+  setChildren(children) {
+    this.children = children;
   }
 
   getName() {
