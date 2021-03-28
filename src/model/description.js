@@ -25,8 +25,8 @@ class Description {
     return this.children[index];
   }
 
-  execute() {
-    this.children.forEach((child) => child.execute());
+  execute(testCaseName) {
+    this.children.forEach((child) => child.execute(testCaseName));
   }
 
   isPassed() {

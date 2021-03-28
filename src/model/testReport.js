@@ -38,9 +38,9 @@ class TestReport {
     return this.testSuites[index];
   }
 
-  execute() {
+  execute(testCaseName) {
     const startedAt = Date.now();
-    this.testSuites.forEach((testSuite) => testSuite.execute());
+    this.testSuites.forEach((testSuite) => testSuite.execute(testCaseName));
     this.elapsed = Date.now() - startedAt;
     this.updateStatus();
   }

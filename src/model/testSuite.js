@@ -33,8 +33,8 @@ class TestSuite {
     this.path = path;
   }
 
-  execute() {
-    this.children.forEach((child) => child.execute());
+  execute(testCaseName) {
+    this.children.forEach((child) => child.execute(testCaseName));
     this.updateStatus();
   }
 

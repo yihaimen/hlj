@@ -18,7 +18,7 @@ class ConsoleReporter {
   }
 
   suiteStatistics() {
-    return '';
+    return `Test Suites: ${green('1 passed')}, 1 total\n`;
   }
 
   testCaseStatistics() {

@@ -9,7 +9,7 @@ describe('Parser', () => {
 
     expect(testReport.getTotalSuites()).toBe(1);
     expect(testReport.getSuite(0).getPath()).toBe(`${FIXTURE}/suites.test.js`);
-    expect(testReport.getTotalTestCases()).toBe(2);
+    expect(testReport.getTotalCount()).toBe(2);
     expect(testReport.getSuite(0).getChild(0).getName()).toBe('Keyword');
     expect(testReport.getSuite(0).getChild(0).getChild(0).getName()).toBe(
       '1 is equal to 1'
@@ -25,7 +25,7 @@ describe('Parser', () => {
     const testReport = parser.parse([`${FIXTURE}/multiple-describe.test.js`]);
 
     expect(testReport.getTotalSuites()).toBe(1);
-    expect(testReport.getTotalTestCases()).toBe(2);
+    expect(testReport.getTotalCount()).toBe(2);
     expect(testReport.getSuite(0).getChild(0).getName()).toBe('Keyword 1');
     expect(testReport.getSuite(0).getChild(0).getChild(0).getName()).toBe(
       '1 is equal to 1'
@@ -45,7 +45,7 @@ describe('Parser', () => {
     const testReport = parser.parse([`${FIXTURE}/nested-describes.test.js`]);
 
     expect(testReport.getTotalSuites()).toBe(1);
-    expect(testReport.getTotalTestCases()).toBe(2);
+    expect(testReport.getTotalCount()).toBe(2);
     expect(testReport.getSuite(0).getChild(0).getName()).toBe('Keyword');
     expect(testReport.getSuite(0).getChild(0).getChild(0).getName()).toBe(
       'Keyword 1'
@@ -77,7 +77,7 @@ describe('Parser', () => {
       '3 is equal to 3'
     );
     expect(testReport.getTotalSuites()).toBe(1);
-    expect(testReport.getTotalTestCases()).toBe(3);
+    expect(testReport.getTotalCount()).toBe(3);
   });
 
   it('should parse multiple nested mixed test case and describe', () => {
@@ -120,7 +120,7 @@ describe('Parser', () => {
     expect(testReport.getSuite(0).getPath()).toBe('fixture/suites.test.js');
     expect(testReport.getSuite(1).getPath()).toBe('fixture/mixed.test.js');
     expect(testReport.getTotalSuites()).toBe(2);
-    expect(testReport.getTotalTestCases()).toBe(5);
+    expect(testReport.getTotalCount()).toBe(5);
   });
 
   describe('Alias', () => {
@@ -130,7 +130,7 @@ describe('Parser', () => {
       const testReport = parser.parse([`${FIXTURE}/alias.test.js`]);
 
       expect(testReport.getTotalSuites()).toBe(1);
-      expect(testReport.getTotalTestCases()).toBe(2);
+      expect(testReport.getTotalCount()).toBe(2);
     });
   });
 });

@@ -18,8 +18,13 @@ class TestCase {
     return this.callback;
   }
 
-  execute() {
+  execute(testCaseName) {
     if (!this.callback) {
+      this.status.skip();
+      return;
+    }
+
+    if (testCaseName && !this.name.includes(testCaseName)) {
       this.status.skip();
       return;
     }
