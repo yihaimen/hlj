@@ -24,6 +24,10 @@ class Description {
   getChild(index) {
     return this.children[index];
   }
+
+  execute() {
+    this.children.forEach((child) => child.execute());
+  }
 }
 
 module.exports = Description;

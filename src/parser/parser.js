@@ -6,10 +6,9 @@ const vm = require('vm');
 class Parser {
   parse(files) {
     const testReport = new TestReport();
-    const path = process.cwd();
     files
       .map((fileName) => {
-        return this.parseFile(path, fileName);
+        return this.parseFile(fileName);
       })
       .forEach((testSuite) => {
         testReport.addTestSuite(testSuite);
@@ -17,9 +16,9 @@ class Parser {
     return testReport;
   }
 
-  parseFile(path, fileName) {
-    const script = new vm.Script(fs.readFileSync(path + '/' + fileName));
-    const context = new Context().create();
+  parseFile(fileName) {
+    const script = new vm.Script(fs.readFileSync(fileName));
+    const context = new Context(fileName).create();
     script.runInContext(context);
     const testSuite = context.testSuite;
     testSuite.setPath(fileName);

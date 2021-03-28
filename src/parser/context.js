@@ -1,9 +1,13 @@
 const TestSuite = require('../model/testSuite');
 const TestCase = require('../model/testCase');
 const Description = require('../model/description');
+const { expect } = require('../matcher');
 const vm = require('vm');
 
 class Context {
+  constructor(path) {
+    this.path = path.substr(0, path.lastIndexOf('/'));
+  }
   create() {
     const tempChildren = [];
     const testSuite = new TestSuite('', tempChildren);
@@ -20,8 +24,11 @@ class Context {
       test: (name, callback) => {
         this.test(name, callback);
       },
+      require: (name) => {
+        return require(this.path + '/' + name);
+      },
+      expect,
     };
-
     this.context = vm.createContext(obj);
     return this.context;
   }

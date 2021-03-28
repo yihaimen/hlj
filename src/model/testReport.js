@@ -35,6 +35,10 @@ class TestReport {
   getSuite(index) {
     return this.testSuites[index];
   }
+
+  execute() {
+    this.testSuites.forEach((testSuite) => testSuite.execute());
+  }
 }
 
 module.exports = TestReport;

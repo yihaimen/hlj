@@ -34,6 +34,10 @@ class TestSuite {
   setPath(path) {
     this.path = path;
   }
+
+  execute() {
+    this.children.forEach((child) => child.execute());
+  }
 }
 
 module.exports = TestSuite;
