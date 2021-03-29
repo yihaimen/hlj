@@ -18,7 +18,9 @@ class ConsoleReporter {
   }
 
   suiteStatistics() {
-    return `Test Suites: ${green('1 passed')}, 1 total\n`;
+    return `Test Suites: ${green(
+      this.testReport.getPassedSuites() + ' passed'
+    )}, ${this.testReport.getTotalSuites()} total\n`;
   }
 
   testCaseStatistics() {

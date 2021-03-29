@@ -24,7 +24,6 @@ class TestReport {
   }
 
   getPassedSuites() {
-    console.log(this.testSuites);
     return this.testSuites.filter((suite) => suite.isPassed()).length;
   }
 
