@@ -1,5 +1,5 @@
-const { exec } = require('./exec');
-const { FIXTURE } = require('./fixtures');
+const { exec } = require('./helper/exec');
+const { FIXTURE } = require('./helper/fixtures');
 
 describe('Skip', () => {
   it('should skip test', function () {

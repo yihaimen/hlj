@@ -1,11 +1,11 @@
-const { exec } = require('./exec');
+const { exec } = require('./helper/exec');
 const {
   getSuccessfulReport,
   getSuccessfulSuite,
   getFailedReport,
   getFailedSuite,
   FIXTURE,
-} = require('./fixtures');
+} = require('./helper/fixtures');
 describe('JavaScript TDD framework', () => {
   it('is a CLI program', () => {
     const stdout = exec(`hlj ${FIXTURE}/sum.test.js`);
@@ -23,22 +23,18 @@ describe('JavaScript TDD framework', () => {
     it('should output number of tests passed', () => {
       const stdout = exec(`hlj ${FIXTURE}/two-tests.test.js`);
       expect(stdout).toContain(
-        '' +
-          `${getSuccessfulSuite('PASS')} ${FIXTURE}/two-tests.test.js\n` +
-          `  ${getSuccessfulReport('✓')} 1 plus 2 is 3\n` +
-          `  ${getSuccessfulReport('✓')} 2 plus 2 is 4\n` +
-          `Tests: ${getSuccessfulReport('2 passed')}, 2 total\n`
+        `Tests: ${getSuccessfulReport('2 passed')}, 2 total`
       );
     });
     it('should output number of tests passed while there are failed tests', () => {
       const stdout = exec(`hlj ${FIXTURE}/passed-and-failed.test.js`);
       expect(stdout).toContain(
-        '' +
-          `${getFailedSuite('FAIL')} ${FIXTURE}/passed-and-failed.test.js\n` +
+        `${getFailedSuite('FAIL')} ${FIXTURE}/passed-and-failed.test.js\n` +
           `  ${getSuccessfulReport('✓')} 1 plus 2 is 3\n` +
           `  ${getFailedReport('x')} 2 plus 2 is 5\n` +
           `  Expected: ${getSuccessfulReport(5)}\n` +
-          `  Received: ${getFailedReport(4)}\n` +
+          `  Received: ${getFailedReport(4)}\n\n` +
+          `Test Suites: ${getSuccessfulReport('0 passed')}, 1 total\n` +
           `Tests: ${getFailedReport('1 failed')}, ${getSuccessfulReport(
             '1 passed'
           )}, 2 total\n`

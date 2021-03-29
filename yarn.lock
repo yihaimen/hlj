@@ -2,14 +2,7 @@
 # yarn lockfile v1
 
 
-child_process@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.npm.taobao.org/child_process/download/child_process-1.0.2.tgz#b1f7e7fc73d25e7fd1d455adc94e143830182b5a"
-  integrity sha1-sffn/HPSXn/R1FWtyU4UODAYK1o=
-
-hlj@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/hlj/-/hlj-0.2.3.tgz#7ce9188a3bf8287455ab87137aadb84c88a54817"
-  integrity sha512-Fx6hZJhmDbuPKFJaczH9jDLTYPgoskpYZrwY+s38Wu8xOciFazeKFZzHV9mIRFS13YuhezO+tbyR2c/yXKtnjQ==
-  dependencies:
-    child_process "^1.0.2"
+"child_process@^1.0.2":
+  "integrity" "sha1-sffn/HPSXn/R1FWtyU4UODAYK1o="
+  "resolved" "https://registry.npmjs.org/child_process/-/child_process-1.0.2.tgz"
+  "version" "1.0.2"
